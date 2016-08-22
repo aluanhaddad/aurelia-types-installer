@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "name": "external-d-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "aluanh@gmail.com",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "jspm": "^0.17.0-beta.25"
+  }
+}

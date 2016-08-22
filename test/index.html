@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+
+    <head></head>
+
+    <body>
+        <script src="jspm_packages/system.js"></script>
+        <script src="jspm.config.js"></script>
+        <script>
+            SystemJS.import('main')
+                .then(console.info.bind(console))
+                .catch(console.error.bind(console));
+        </script>
+    </body>
+
+</html>

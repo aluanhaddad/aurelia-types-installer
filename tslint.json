@@ -1,0 +1,20 @@
+{
+    "rules": {
+        "no-construct": true,
+        "semicolon": [
+            "always"
+        ],
+        "whitespace": [
+            true,
+            "check-branch",
+            "check-decl",
+            "check-module",
+            "check-operator",
+            "check-separator",
+            "check-type",
+            "check-typecast"
+        ],"quotemark": [
+            "single"
+        ]
+    }
+}

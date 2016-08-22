@@ -1,0 +1,18 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es6",
+        "sourceMap": true,
+        "watch": true,
+        "types": [],
+        "baseUrl": "",
+        "moduleResolution": "node",
+        "paths": {}
+    },
+    "exclude": [
+        "node_modules",
+        "jspm_packages",
+        "test"
+    ]
+}
