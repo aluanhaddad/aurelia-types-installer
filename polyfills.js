@@ -1,4 +1,12 @@
 'use strict';
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator.throw(value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments)).next());
+    });
+};
 if (typeof Object.entries !== 'function') {
     Object.entries = o => Object.keys(o).map(key => [key, o[key]]);
 }
@@ -22,6 +30,14 @@ if (typeof Object.assign !== 'function') {
             }
         }
         return target;
+    };
+}
+if (typeof Array.prototype.whenAll !== 'function') {
+    Array.prototype.whenAll = function () {
+        return this.reduce((resolved, promise) => __awaiter(this, void 0, void 0, function* () {
+            const data = yield promise;
+            return (resolved || []).concat(data);
+        }), []);
     };
 }
 //# sourceMappingURL=polyfills.js.map

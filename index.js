@@ -1,19 +1,30 @@
 /// <reference path="node_modules/@types/node/index.d.ts" />
 "use strict";
-const https = require('https');
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator.throw(value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments)).next());
+    });
+};
 const fs = require('fs');
-const request = (dependency) => {
-    var [name, version] = dependency.split('@');
+const rp = require('request-promise');
+if (!fs.existsSync('./test/dest')) {
+    fs.mkdirSync('./test/dest');
+}
+const request = (dependency) => __awaiter(this, void 0, void 0, function* () {
+    const [name, version] = dependency.split('@');
     const url = `https://raw.githubusercontent.com/aurelia/${name}/${version}/dist/aurelia-${name}.d.ts`;
     const destDir = `./test/dest/aurelia-${name}@${version}`;
     if (!fs.existsSync(destDir)) {
         fs.mkdirSync(destDir);
     }
-    const file = fs.createWriteStream(`./test/dest/aurelia-${name}@${version}/index.d.ts`);
-    return https.request({ method: 'GET', path: url }, (response) => {
-        response.pipe(file);
-    });
-};
+    const response = yield rp(url, { method: 'GET' });
+    const targetFile = `./test/dest/aurelia-${name}@${version}/aurelia-${name}.d.ts`;
+    const file = fs.createWriteStream(targetFile);
+    fs.writeFileSync(targetFile, response, { encoding: 'UTF8' });
+});
 const jspmConfig = {};
 global.global.SystemJS = {
     config: config => {
@@ -23,6 +34,7 @@ global.global.SystemJS = {
         }, jspmConfig);
     }
 };
+require('./test/jspm.config.js');
 function unrollWithFilter(o, predicate) {
     if (!o || typeof o === 'number' || typeof o === 'boolaean') {
         return [];
@@ -36,17 +48,18 @@ function unrollWithFilter(o, predicate) {
         .reduce((values, value) => values.concat(value), [])
         .filter(value => typeof value === 'string' && predicate(value));
 }
-unrollWithFilter(jspmConfig, name => name.split('@').length > 1)
+Promise.all(unrollWithFilter(jspmConfig, name => name.split('@').length > 1)
     .filter(item => item.indexOf('aurelia-') > -1).map(x => x.split('aurelia-')[1])
-    .forEach(item => request(item));
-/*var paths = fs.readdirSync('./test/dest').reduce((pths, dir) => {
-    pths.push(dir);
-    return pths;
+    .map(item => request(item)));
+var paths = fs.readdirSync('./test/dest').reduce((pths, dir) => {
+    return pths.concat(dir);
 }, []);
+/*tslint:disable */
 const tsconfig = require('./test/tsconfig.json');
-if (!tsconfig.paths) { tsconfig.paths = {}; }
-paths.forEach(path => tsconfig.paths[path.split('@')[0]] = [path + '/index.d.ts']);
-fs.writeFileSync('./test.tsconfig.json', JSON.stringify(tsconfig));
-*/
-//export = request;
+/*tslint:enable */
+if (!tsconfig.compilerOptions.paths) {
+    tsconfig.compilerOptions.paths = {};
+}
+paths.forEach(path => tsconfig.compilerOptions.paths[path.split('@')[0]] = [`dest/${path}/${path.split('@')[0]}`]);
+fs.writeFileSync('./test/tsconfig.json', JSON.stringify(tsconfig, (x, y) => y, 2));
 //# sourceMappingURL=index.js.map

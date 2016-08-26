@@ -1,1 +1,0 @@
-import { bindable } from 'aurelia-framework';

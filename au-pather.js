@@ -1,6 +1,5 @@
 "use strict";
 require('./polyfills');
-const fs = require('fs');
 global.SystemJS = function createFakeSystemJSConfigAggregator() {
     const cfg = {};
     return {
@@ -23,7 +22,7 @@ function generatePaths(cfg) {
         .filter(([key]) => key.indexOf('aurelia') > -1)
         .map(([key, value]) => {
         const version = value.split('@')[1];
-        const newValue = `jspm_packages/${value.replace(':', '/')}/${key}.d.ts`;
+        const newValue = `jspm_packages/${value.replace(':', '/')}/${key}`;
         return [key, newValue];
     })
         .reduce((paths, [key, value]) => {
@@ -33,10 +32,10 @@ function generatePaths(cfg) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = generatePaths;
-const c = generatePaths(global.SystemJS.cfg);
-console.log(c);
-const tsconfig = require('./test/tsconfig.json');
-tsconfig.compilerOptions.paths = Object.entries(c).reduce((paths, [key, value]) => { paths[key] = value; return paths; }, tsconfig.compilerOptions.paths || {});
-console.log(tsconfig);
-fs.writeFileSync('./test/tsconfig.json', JSON.stringify(tsconfig, (key, value) => value, 4));
+// const c = generatePaths(global.SystemJS.cfg);
+// console.log(c);
+// import tsconfig = require('./test/tsconfig.json');
+// tsconfig.compilerOptions.paths = Object.entries(c).reduce((paths, [key, value]) => { paths[key] = value; return paths; }, tsconfig.compilerOptions.paths || {});
+// console.log(tsconfig);
+// fs.writeFileSync('./test/tsconfig.json', JSON.stringify(tsconfig, (key, value) => value, 4)); 
 //# sourceMappingURL=au-pather.js.map

@@ -3,13 +3,15 @@
 
     <head></head>
 
-    <body>
+    <body aurelia-app>
         <script src="jspm_packages/system.js"></script>
         <script src="jspm.config.js"></script>
         <script>
-            SystemJS.import('main')
+     
+            SystemJS.import('aurelia-bootstrapper')
                 .then(console.info.bind(console))
                 .catch(console.error.bind(console));
+           
         </script>
     </body>
 
