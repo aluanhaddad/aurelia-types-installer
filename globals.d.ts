@@ -1,3 +1,10 @@
-declare module "*.json" {
-    export default '';
+
+
+declare namespace NodeJS {
+    interface Global {
+        SystemJS?: {
+            config(config: any);
+        };
+
+    }
 }

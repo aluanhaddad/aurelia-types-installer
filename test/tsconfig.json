@@ -1,87 +1,97 @@
 {
-  "compilerOptions": {
-    "module": "system",
-    "target": "es6",
-    "sourceMap": true,
-    "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "baseUrl": ".",
-    "paths": {
-      "aurelia-binding": [
-        "dest/aurelia-binding@1.0.1/aurelia-binding"
-      ],
-      "aurelia-bootstrapper": [
-        "dest/aurelia-bootstrapper@1.0.0/aurelia-bootstrapper"
-      ],
-      "aurelia-dependency-injection": [
-        "dest/aurelia-dependency-injection@1.0.0/aurelia-dependency-injection"
-      ],
-      "aurelia-event-aggregator": [
-        "dest/aurelia-event-aggregator@1.0.0/aurelia-event-aggregator"
-      ],
-      "aurelia-framework": [
-        "dest/aurelia-framework@1.0.1/aurelia-framework"
-      ],
-      "aurelia-history-browser": [
-        "dest/aurelia-history-browser@1.0.0/aurelia-history-browser"
-      ],
-      "aurelia-history": [
-        "dest/aurelia-history@1.0.0/aurelia-history"
-      ],
-      "aurelia-loader-default": [
-        "dest/aurelia-loader-default@1.0.0/aurelia-loader-default"
-      ],
-      "aurelia-loader": [
-        "dest/aurelia-loader@1.0.0/aurelia-loader"
-      ],
-      "aurelia-logging-console": [
-        "dest/aurelia-logging-console@1.0.0/aurelia-logging-console"
-      ],
-      "aurelia-logging": [
-        "dest/aurelia-logging@1.0.0/aurelia-logging"
-      ],
-      "aurelia-metadata": [
-        "dest/aurelia-metadata@1.0.0/aurelia-metadata"
-      ],
-      "aurelia-pal-browser": [
-        "dest/aurelia-pal-browser@1.0.0/aurelia-pal-browser"
-      ],
-      "aurelia-pal": [
-        "dest/aurelia-pal@1.0.0/aurelia-pal"
-      ],
-      "aurelia-path": [
-        "dest/aurelia-path@1.0.0/aurelia-path"
-      ],
-      "aurelia-polyfills": [
-        "dest/aurelia-polyfills@1.0.0/aurelia-polyfills"
-      ],
-      "aurelia-route-recognizer": [
-        "dest/aurelia-route-recognizer@1.0.0/aurelia-route-recognizer"
-      ],
-      "aurelia-router": [
-        "dest/aurelia-router@1.0.2/aurelia-router"
-      ],
-      "aurelia-task-queue": [
-        "dest/aurelia-task-queue@1.0.0/aurelia-task-queue"
-      ],
-      "aurelia-templating-binding": [
-        "dest/aurelia-templating-binding@1.0.0/aurelia-templating-binding"
-      ],
-      "aurelia-templating-resources": [
-        "dest/aurelia-templating-resources@1.0.0/aurelia-templating-resources"
-      ],
-      "aurelia-templating-router": [
-        "dest/aurelia-templating-router@1.0.0/aurelia-templating-router"
-      ],
-      "aurelia-templating": [
-        "dest/aurelia-templating@1.0.0/aurelia-templating"
-      ]
-    }
-  },
-  "exclude": [
-    "node_modules",
-    "jspm_packages",
-    "test"
-  ]
+    "compilerOptions": {
+        "module": "system",
+        "target": "es6",
+        "sourceMap": true,
+        "allowSyntheticDefaultImports": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "baseUrl": ".",
+        "moduleResolution": "node",
+        "paths": {
+            "aurelia-binding": [
+                "typings/aurelia-binding@1.0.3"
+            ],
+            "aurelia-bootstrapper": [
+                "typings/aurelia-bootstrapper@1.0.0"
+            ],
+            "aurelia-dependency-injection": [
+                "typings/aurelia-dependency-injection@1.0.0"
+            ],
+            "aurelia-event-aggregator": [
+                "typings/aurelia-event-aggregator@1.0.0"
+            ],
+            "aurelia-framework": [
+                "typings/aurelia-framework@1.0.2"
+            ],
+            "aurelia-history-browser": [
+                "typings/aurelia-history-browser@1.0.0"
+            ],
+            "aurelia-history": [
+                "typings/aurelia-history@1.0.0"
+            ],
+            "aurelia-loader-default": [
+                "typings/aurelia-loader-default@1.0.0"
+            ],
+            "aurelia-loader": [
+                "typings/aurelia-loader@1.0.0"
+            ],
+            "aurelia-logging-console": [
+                "typings/aurelia-logging-console@1.0.0"
+            ],
+            "aurelia-logging": [
+                "typings/aurelia-logging@1.0.0"
+            ],
+            "aurelia-metadata": [
+                "typings/aurelia-metadata@1.0.0"
+            ],
+            "aurelia-pal-browser": [
+                "typings/aurelia-pal-browser@1.0.0"
+            ],
+            "aurelia-pal": [
+                "typings/aurelia-pal@1.0.0"
+            ],
+            "aurelia-path": [
+                "typings/aurelia-path@1.0.0"
+            ],
+            "aurelia-polyfills": [
+                "typings/aurelia-polyfills@1.0.0"
+            ],
+            "aurelia-route-recognizer": [
+                "typings/aurelia-route-recognizer@1.0.0"
+            ],
+            "aurelia-router": [
+                "typings/aurelia-router@1.0.2"
+            ],
+            "aurelia-task-queue": [
+                "typings/aurelia-task-queue@1.0.0"
+            ],
+            "aurelia-templating-binding": [
+                "typings/aurelia-templating-binding@1.0.0"
+            ],
+            "aurelia-templating-resources": [
+                "typings/aurelia-templating-resources@1.0.0"
+            ],
+            "aurelia-templating-router": [
+                "typings/aurelia-templating-router@1.0.0"
+            ],
+            "aurelia-templating": [
+                "typings/aurelia-templating@1.0.1"
+            ],
+            "aurelia-testing": [
+                "typings/aurelia-testing@1.0.0-beta.2.0.0"
+            ],
+            "aurelia-http-client": [
+                "typings/aurelia-http-client@1.0.0"
+            ],
+            "aurelia-fetch-client": [
+                "typings/aurelia-fetch-client@1.0.0"
+            ]
+        }
+    },
+    "exclude": [
+        "node_modules",
+        "jspm_packages",
+        "test"
+    ]
 }

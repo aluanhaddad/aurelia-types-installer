@@ -1,24 +1,29 @@
 {
-  "private": true,
-  "name": "external-d-ts",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "aluanh@gmail.com",
-  "license": "MIT",
-  "dependencies": {
-    "@types/async": "^2.0.31",
-    "@types/bluebird": "^3.0.32",
-    "@types/request": "0.0.30",
-    "@types/request-promise": "^3.0.30",
-    "async": "^2.0.1",
-    "request": "^2.74.0",
-    "request-promise": "^4.1.1"
-  },
-  "devDependencies": {
-    "jspm": "^0.17.0-beta.25"
-  }
+    "private": true,
+    "name": "external-d-ts",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "aluanh@gmail.com",
+    "license": "MIT",
+    "dependencies": {
+        "@types/async": "^2.0.31",
+        "@types/bluebird": "^3.0.32",
+        "@types/minimist": "^1.1.28",
+        "@types/mz": "0.0.28",
+        "@types/request": "0.0.30",
+        "@types/request-promise": "^3.0.30",
+        "async": "^2.0.1",
+        "minimist": "^1.2.0",
+        "mz": "^2.4.0",
+        "request": "^2.74.0",
+        "request-promise": "^4.1.1"
+    },
+    "devDependencies": {
+        "jspm": "^0.17.0-beta.25"
+    }
 }
