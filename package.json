@@ -2,7 +2,6 @@
   "name": "aurelia-types-installer",
   "version": "0.0.3",
   "bin": {
-    "aurelia-dts-installer": "./bin/aurelia-dts-installer",
     "ati": "./bin/ati"
   },
   "description": "A utiltiy for Aurelia + TypeScript + JSPM users that installs exact .d.ts versions as external modules.",
