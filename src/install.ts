@@ -7,10 +7,11 @@ import { fs } from 'mz';
 
 import parseJspmConfig from './extract-jspm-config-paths';
 
-export default async function install(projectDir: string, framework: string, outputDir: string) {
+export default async function install(options: { projectDir: string, framework: string, dest: string, explicitIndex: boolean }) {
+  const {projectDir, framework, dest, explicitIndex} = options;
   const baseUrl = await fs.realpath(projectDir);
-  let jspmConfigFileName: string;
 
+  let jspmConfigFileName: string;
   if (await fs.exists(await fs.realpath(baseUrl + '/jspm.config.js'))) {
     jspmConfigFileName = baseUrl + '/jspm.config.js';
   } else {
@@ -20,8 +21,8 @@ export default async function install(projectDir: string, framework: string, out
     .filter(item => item.indexOf(`${framework}-`) > -1)
     .map(x => x.split(`${framework}-`)[1]);
 
-  await ensureDir(baseUrl + '/' + outputDir);
-  paths.forEach(async path => await downloadDeclaration(baseUrl, outputDir, path, framework));
+  await ensureDir(baseUrl + '/' + dest);
+  paths.forEach(async path => await downloadDeclaration(baseUrl, dest, path, framework));
 
   let generatedTsConfigPath = baseUrl + '/tsconfig.paths.json';
   const tsConfig: TSConfig = require(await fs.realpath(baseUrl + '/tsconfig.json'));
@@ -32,7 +33,6 @@ export default async function install(projectDir: string, framework: string, out
     generatedTsConfig = {
       compilerOptions: {
         baseUrl: '.',
-        moduleResolution: 'node',
         paths: {}
       }
     };
@@ -41,22 +41,23 @@ export default async function install(projectDir: string, framework: string, out
     generatedTsConfig.compilerOptions = Object.assign(generatedTsConfig.compilerOptions, {
       paths: tsConfig.compilerOptions.paths || {},
       baseUrl: '.',
-      moduleResolution: 'node' as 'node'
     });
   }
   const {compilerOptions} = generatedTsConfig;
 
 
   paths.forEach(name => {
-    compilerOptions.paths[`${framework}-${name.split('@')[0]}`] = [`${outputDir}/${framework}-${name}`];
+    compilerOptions.paths[`${framework}-${name.split('@')[0]}`] = [`${dest}/${framework}-${name}${explicitIndex ? '/index' : ''}`];
   });
-
+  if (!explicitIndex && !tsConfig.compilerOptions.moduleResolution && !generatedTsConfig.compilerOptions.moduleResolution) {
+    generatedTsConfig.compilerOptions.moduleResolution = 'node';
+  }
   await fs.writeFile(baseUrl + '/tsconfig.paths.json', JSON.stringify(generatedTsConfig, (x, y) => y, 2));
 }
 
 type TSConfig = {
   compilerOptions: {
-    moduleResolution?: 'classic' | 'node'
+    moduleResolution?: 'node' | 'classic',
     baseUrl?: string
     paths: {
       [key: string]: string[]

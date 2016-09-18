@@ -14,8 +14,9 @@ const ensure_dir_1 = require("./ensure-dir");
 const aquire_declaration_1 = require("./aquire-declaration");
 const mz_1 = require("mz");
 const extract_jspm_config_paths_1 = require("./extract-jspm-config-paths");
-function install(projectDir, framework, outputDir) {
+function install(options) {
     return __awaiter(this, void 0, void 0, function* () {
+        const { projectDir, framework, dest, explicitIndex } = options;
         const baseUrl = yield mz_1.fs.realpath(projectDir);
         let jspmConfigFileName;
         if (yield mz_1.fs.exists(yield mz_1.fs.realpath(baseUrl + '/jspm.config.js'))) {
@@ -27,8 +28,8 @@ function install(projectDir, framework, outputDir) {
         const paths = extract_jspm_config_paths_1.default(yield mz_1.fs.realpath(jspmConfigFileName), name => name.split('@').length > 1)
             .filter(item => item.indexOf(`${framework}-`) > -1)
             .map(x => x.split(`${framework}-`)[1]);
-        yield ensure_dir_1.ensureDir(baseUrl + '/' + outputDir);
-        paths.forEach((path) => __awaiter(this, void 0, void 0, function* () { return yield aquire_declaration_1.default(baseUrl, outputDir, path, framework); }));
+        yield ensure_dir_1.ensureDir(baseUrl + '/' + dest);
+        paths.forEach((path) => __awaiter(this, void 0, void 0, function* () { return yield aquire_declaration_1.default(baseUrl, dest, path, framework); }));
         let generatedTsConfigPath = baseUrl + '/tsconfig.paths.json';
         const tsConfig = require(yield mz_1.fs.realpath(baseUrl + '/tsconfig.json'));
         let generatedTsConfig;
@@ -39,7 +40,6 @@ function install(projectDir, framework, outputDir) {
             generatedTsConfig = {
                 compilerOptions: {
                     baseUrl: '.',
-                    moduleResolution: 'node',
                     paths: {}
                 }
             };
@@ -48,13 +48,15 @@ function install(projectDir, framework, outputDir) {
             generatedTsConfig.compilerOptions = Object.assign(generatedTsConfig.compilerOptions, {
                 paths: tsConfig.compilerOptions.paths || {},
                 baseUrl: '.',
-                moduleResolution: 'node'
             });
         }
         const { compilerOptions } = generatedTsConfig;
         paths.forEach(name => {
-            compilerOptions.paths[`${framework}-${name.split('@')[0]}`] = [`${outputDir}/${framework}-${name}`];
+            compilerOptions.paths[`${framework}-${name.split('@')[0]}`] = [`${dest}/${framework}-${name}${explicitIndex ? '/index' : ''}`];
         });
+        if (!explicitIndex && !tsConfig.compilerOptions.moduleResolution && !generatedTsConfig.compilerOptions.moduleResolution) {
+            generatedTsConfig.compilerOptions.moduleResolution = 'node';
+        }
         yield mz_1.fs.writeFile(baseUrl + '/tsconfig.paths.json', JSON.stringify(generatedTsConfig, (x, y) => y, 2));
     });
 }
