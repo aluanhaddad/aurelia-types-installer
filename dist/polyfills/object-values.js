@@ -1,11 +1,11 @@
 "use strict";
 function polyfillObjectValues() {
     if (typeof Object.values !== 'function') {
-        Object.values = function (o) {
+        Object.values = o => {
             if (!Object) {
                 throw TypeError('Cannot convert undefined or null to object');
             }
-            return Object.keys(o).map(function (key) { return o[key]; });
+            return Object.keys(o).map(key => o[key]);
         };
     }
 }
