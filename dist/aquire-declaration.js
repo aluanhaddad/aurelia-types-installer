@@ -40,7 +40,7 @@ var requestPromise = require("request-promise");
 var prefix;
 function retrieveFromGitHub(baseUrl, destinationDir, versionedName, frameworkNameOrPrefix) {
     return __awaiter(this, void 0, void 0, function () {
-        var prefix, _a, name, version, url, destDir, data;
+        var _a, name, version, url, destDir, data;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
