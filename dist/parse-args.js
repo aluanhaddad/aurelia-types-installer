@@ -1,7 +1,7 @@
 "use strict";
-const minimist = require("minimist");
+var minimist = require("minimist");
 function default_1() {
-    const { _, projectDir, framework, dest, explicitIndex } = minimist(process.argv.slice(2), {
+    var _a = minimist(process.argv.slice(2), {
         alias: { install: 'i' }, default: {
             projectDir: '.',
             framework: 'aurelia',
@@ -9,8 +9,8 @@ function default_1() {
             explicitIndex: true
         },
         '--': true
-    });
-    return { command: _[0], projectDir, framework, dest, explicitIndex };
+    }), _ = _a._, projectDir = _a.projectDir, framework = _a.framework, dest = _a.dest, explicitIndex = _a.explicitIndex;
+    return { command: _[0], projectDir: projectDir, framework: framework, dest: dest, explicitIndex: explicitIndex };
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = default_1;

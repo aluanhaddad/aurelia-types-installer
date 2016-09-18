@@ -1,10 +1,11 @@
 "use strict";
 function default_1(jspmConfigPath, predicate) {
-    const jspmConfig = {};
-    const SystemJSRestore = global.global.SystemJS;
+    var jspmConfig = {};
+    var SystemJSRestore = global.global.SystemJS;
     global.global.SystemJS = {
-        config: config => {
-            return Object.keys(config).map(key => [key, config[key]]).reduce((cfg, [key, value]) => {
+        config: function (config) {
+            return Object.keys(config).map(function (key) { return [key, config[key]]; }).reduce(function (cfg, _a) {
+                var key = _a[0], value = _a[1];
                 cfg[key] = value;
                 return cfg;
             }, jspmConfig);
@@ -24,9 +25,9 @@ function unrollWithFilter(o, predicate) {
     }
     return Object
         .values(o)
-        .flatMap(value => typeof value !== 'string'
+        .flatMap(function (value) { return typeof value !== 'string'
         ? unrollWithFilter(value, predicate)
-        : [value])
-        .filter(value => typeof value === 'string' && predicate(value));
+        : [value]; })
+        .filter(function (value) { return typeof value === 'string' && predicate(value); });
 }
 //# sourceMappingURL=extract-jspm-config-paths.js.map

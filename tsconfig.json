@@ -2,13 +2,15 @@
   "compileOnSave": true,
   "compilerOptions": {
     "module": "commonjs",
-    "target": "es6",
+    "target": "es5",
+    "lib": [
+      "es2017"
+    ],
     "sourceMap": true,
     "moduleResolution": "node",
     "strictNullChecks": true,
     "outDir": "dist",
-    "rootDir": "src",
-    "allowJs": false
+    "rootDir": "src"
   },
   "exclude": [
     "node_modules",
