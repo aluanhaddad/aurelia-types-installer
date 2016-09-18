@@ -1,6 +1,6 @@
 {
   "name": "aurelia-types-installer",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "bin": {
     "aurelia-dts-installer": "./bin/ati",
     "ati": "./bin/ati"
