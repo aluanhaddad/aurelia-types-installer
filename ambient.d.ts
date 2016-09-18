@@ -1,3 +1,1 @@
-declare module "*.json" {
-    export default '';
-}
+declare module "*.json";

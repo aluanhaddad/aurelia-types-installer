@@ -1,9 +1,0 @@
-{
-    "format": "esm",
-    "directories": {
-        "dist": "dist"
-    },
-    "files": [
-        "dist/a*.*"
-    ]
-}

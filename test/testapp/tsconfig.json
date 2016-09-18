@@ -1,0 +1,16 @@
+{
+    "extends": "./tsconfig.paths.json",
+    "compilerOptions": {
+        "module": "system",
+        "target": "es6",
+        "sourceMap": true,
+        "allowSyntheticDefaultImports": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true
+    },
+    "exclude": [
+        "node_modules",
+        "jspm_packages",
+        "test"
+    ]
+}

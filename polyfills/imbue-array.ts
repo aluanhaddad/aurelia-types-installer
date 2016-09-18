@@ -12,21 +12,10 @@ export default function imbue() {
         });
         return this.map(arraySelector).reduce((x, y) => x.concat(y), []);
     };
-
-    Array.prototype.toMap = function toMap<T, K>(keySelector: (x: T) => K) {
-        return new Map<K, T>(this.map(e => [keySelector(e), e]));
-    };
 }
 
 declare global {
     export interface Array<T> {
-        groupBy(keySelector: (x: T) => string): {
-            [key: string]: T[]
-        };
-        groupBy(keySelector: (x: T) => string): {
-            [key: number]: T[]
-        };
-        toMap<K>(this: this, keySelector: (x: T) => K): Map<K, T>;
         flatMap<TThis extends T[], R, S>(this: this, elementToArray: (x: T) => R[], projection: (x: R) => S): S[];
         flatMap<TThis extends T[], R>(this: this, elementToArray: (x: T) => R[]): R[];
     }

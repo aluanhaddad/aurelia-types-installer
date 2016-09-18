@@ -1,9 +1,8 @@
 "use strict";
 const minimist = require("minimist");
 function default_1() {
-    const args = minimist(process.argv.slice(2));
-    console.table(args);
-    return args;
+    const { project, frameworkNameOrPrefix, dest } = minimist(process.argv.slice(2));
+    return { project, frameworkNameOrPrefix, dest };
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = default_1;
