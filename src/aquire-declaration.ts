@@ -1,10 +1,8 @@
 import { fs } from 'mz';
 import { ensureDir } from './ensure-dir';
 import requestPromise = require('request-promise');
-let prefix: string;
 
-export default async function retrieveFromGitHub(baseUrl: string, destinationDir: string, versionedName: string, frameworkNameOrPrefix: string) {
-  prefix = frameworkNameOrPrefix;
+export default async function retrieveFromGitHub(baseUrl: string, destinationDir: string, versionedName: string, prefix: string) {
   const {name, version} = nameAndVesion(versionedName);
 
   const url = `https://raw.githubusercontent.com/${prefix}/${name}/${version}/dist/${prefix}-${name}.d.ts`;
@@ -13,11 +11,11 @@ export default async function retrieveFromGitHub(baseUrl: string, destinationDir
   await ensureDir(destDir);
 
   const data = await requestPromise(url, { method: 'GET' }) as string;
-  await save(baseUrl, destinationDir, versionedName, data);
+  await save(baseUrl, destinationDir, versionedName, data, prefix);
   return `${baseUrl}/${destinationDir}/${prefix}-${name}@${version}/${prefix}-${name}`;
 };
 
-async function save(baseUrl, destinationDir, versionedName: string, dts: string) {
+async function save(baseUrl, destinationDir, versionedName: string, dts: string, prefix: string) {
   const {name, version} = nameAndVesion(versionedName);
   const targetFile = `${baseUrl}/${destinationDir}/${prefix}-${name}@${version}/index.d.ts`;
   const file = fs.createWriteStream(targetFile, { encoding: 'UTF8' });
