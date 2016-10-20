@@ -1,8 +1,10 @@
 # aurelia-types-installer
 A utiltiy for Aurelia + TypeScript + jspm users that installs exact .d.ts versions as external modules.
 
-[![npm version](https://badge.fury.io/js/aurelia-types-installer.svg)](https://badge.fury.io/js/aurelia-types-installer)
-[![npm](https://img.shields.io/npm/dt/aurelia-types-installer.svg)](aluanhaddad/aurelia-types-installer)
+[![GitHub release](https://img.shields.io/github/release/aluanhaddad/aurelia-types-installer.svg)]()
+[![npm](https://img.shields.io/npm/v/ng2-conventions-decorators.svg)](aurelia-types-installer)
+[![npm](https://img.shields.io/npm/l/ng2-conventions-decorators.svg)](aluanhaddad/aurelia-types-installer)
+[![npm](https://img.shields.io/npm/dt/ng2-conventions-decorators.svg)](aluanhaddad/aurelia-types-installer)
 
 Aurelia Types Installer (ati) is a small command line utility for developers using [Aurelia](https://github.com/Aurelia) with [jspm](//jspm.io/) and [TypeScript](https://github.com/Microsoft/TypeScript).
 
