@@ -1,6 +1,4 @@
 # aurelia-types-installer
-A utiltiy for Aurelia + TypeScript + jspm users that installs exact .d.ts versions as external modules.
-
 [![GitHub release](https://img.shields.io/github/release/aluanhaddad/aurelia-types-installer.svg)]()
 [![npm](https://img.shields.io/npm/v/aurelia-types-installer.svg)](aluanhaddad/aurelia-types-installer)
 [![npm](https://img.shields.io/npm/l/aurelia-types-installer.svg)](aluanhaddad/aurelia-types-installer)
