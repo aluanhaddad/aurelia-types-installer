@@ -3,12 +3,12 @@
 [![npm](https://img.shields.io/npm/v/aurelia-types-installer.svg)](aluanhaddad/aurelia-types-installer)
 [![npm](https://img.shields.io/npm/l/aurelia-types-installer.svg)](aluanhaddad/aurelia-types-installer)
 [![npm](https://img.shields.io/npm/dt/aurelia-types-installer.svg)](aluanhaddad/aurelia-types-installers)    
-
+[![Build Status](https://travis-ci.org/aluanhaddad/aurelia-types-installer.svg?branch=master)](https://travis-ci.org/aluanhaddad/aurelia-types-installer)
 #### Aurelia Types Installer (ati) is a small command line utility for developers using [Aurelia](https://github.com/Aurelia) with [jspm](//jspm.io/) and [TypeScript](https://github.com/Microsoft/TypeScript).
 
 ati parses jspm configuration locates Aurelia package dependencies and installs their exact corresponding `.d.ts` declarations as proper
 anonymous external modules into a location of your choosing. As it install declarations, it generates TypeScript path configuratoin and 
-writes it to a file named `tsconfig.paths.json` by default. If you are using typescript@2.1.0-dev you can import this file into your `tsconfig.json`
+writes it to a file named `tsconfig.paths.json` by default. If you are using typescript@^2.1.0, you can import this file into your `tsconfig.json`
 
 ati works best when installed as a local `"devDependency"` and is designed to be run as part of your build process.
 
