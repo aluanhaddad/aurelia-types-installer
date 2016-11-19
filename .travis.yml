@@ -3,10 +3,10 @@ node_js:
   - "6"
   - "6.1"
   - "5.11"
+before_script: cd test\testapp npm install
+before_script: npm i
+before_script: jspm i
+before_script: cd ..\..
 before_script:
-  cd test\testapp
-  - npm install
-  - jspm install
-  cd ..\..
   - npm install
   - npm test
