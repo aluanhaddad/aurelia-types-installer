@@ -2,7 +2,7 @@
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator.throw(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
         function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments)).next());
     });
@@ -37,14 +37,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var mz_1 = require("mz");
 var ensure_dir_1 = require("./ensure-dir");
 var requestPromise = require("request-promise");
-var prefix;
-function retrieveFromGitHub(baseUrl, destinationDir, versionedName, frameworkNameOrPrefix) {
+function retrieveFromGitHub(baseUrl, destinationDir, versionedName, prefix) {
     return __awaiter(this, void 0, void 0, function () {
         var _a, name, version, url, destDir, data;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
-                    prefix = frameworkNameOrPrefix;
                     _a = nameAndVesion(versionedName), name = _a.name, version = _a.version;
                     url = "https://raw.githubusercontent.com/" + prefix + "/" + name + "/" + version + "/dist/" + prefix + "-" + name + ".d.ts";
                     destDir = baseUrl + "/" + destinationDir + "/" + prefix + "-" + name + "@" + version;
@@ -54,7 +52,7 @@ function retrieveFromGitHub(baseUrl, destinationDir, versionedName, frameworkNam
                     return [4 /*yield*/, requestPromise(url, { method: 'GET' })];
                 case 2:
                     data = _b.sent();
-                    return [4 /*yield*/, save(baseUrl, destinationDir, versionedName, data)];
+                    return [4 /*yield*/, save(baseUrl, destinationDir, versionedName, data, prefix)];
                 case 3:
                     _b.sent();
                     return [2 /*return*/, baseUrl + "/" + destinationDir + "/" + prefix + "-" + name + "@" + version + "/" + prefix + "-" + name];
@@ -65,7 +63,7 @@ function retrieveFromGitHub(baseUrl, destinationDir, versionedName, frameworkNam
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = retrieveFromGitHub;
 ;
-function save(baseUrl, destinationDir, versionedName, dts) {
+function save(baseUrl, destinationDir, versionedName, dts, prefix) {
     return __awaiter(this, void 0, void 0, function () {
         var _a, name, version, targetFile, file;
         return __generator(this, function (_b) {

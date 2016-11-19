@@ -2,7 +2,7 @@
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator.throw(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
         function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments)).next());
     });
@@ -43,7 +43,7 @@ var mz_1 = require("mz");
 var extract_jspm_config_paths_1 = require("./extract-jspm-config-paths");
 function install(options) {
     return __awaiter(this, void 0, void 0, function () {
-        _this = this;
+        var _this = this;
         var projectDir, framework, dest, explicitIndex, baseUrl, jspmConfigFileName, _a, _b, _c, paths, _d, _e, generatedTsConfigPath, tsConfig, _f, _g, generatedTsConfig, compilerOptions;
         return __generator(this, function (_h) {
             switch (_h.label) {
@@ -115,7 +115,6 @@ function install(options) {
             }
         });
     });
-    var _this;
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = install;
