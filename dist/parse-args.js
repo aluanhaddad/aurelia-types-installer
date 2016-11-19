@@ -5,7 +5,7 @@ function default_1() {
         alias: { install: 'i' }, default: {
             projectDir: '.',
             framework: 'aurelia',
-            dest: 'types',
+            dest: 'jspm_packages/npm',
             explicitIndex: true
         },
         '--': true
