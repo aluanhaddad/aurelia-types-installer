@@ -8,11 +8,10 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "prepublish": "npm run test && npm run build",
-    "cleantestapp": "rimraf test/testapp/types && rimraf test/testapps/tsconfig.paths.json",
+    "cleantestapp": "rimraf test/testapp/jspm_packages/npm/**/*.ts && rimraf test/testapps/tsconfig.paths.json",
     "clean": "rimraf dist && npm run cleantestapp",
     "test": "node dist/index.js i --projectDir ./test/testapp --dest jspm_packages/npm",
-    "pretest": "npm run build",
-    "posttest": "npm run cleantestapp"
+    "pretest": "npm run build"
   },
   "main": "dist/index",
   "author": "aluanh@gmail.com",

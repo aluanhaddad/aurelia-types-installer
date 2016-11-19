@@ -65,7 +65,7 @@ function install(options) {
                     _d = extract_jspm_config_paths_1.default;
                     return [4 /*yield*/, mz_1.fs.realpath(jspmConfigFileName)];
                 case 4:
-                    paths = _d.apply(void 0, [_h.sent(), function (name) { return name.split('@').length > 1; }])
+                    paths = _d.apply(void 0, [_h.sent(), function (name) { return name.split('@').length > 1 && !name.match(/aurelia-types-installer/); }])
                         .filter(function (item) { return item.indexOf(framework + "-") > -1; })
                         .map(function (x) { return x.split(framework + "-")[1]; });
                     return [4 /*yield*/, ensure_dir_1.ensureDir(baseUrl + '/' + dest)];

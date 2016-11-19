@@ -17,7 +17,7 @@ export default async function install(options: { projectDir: string, framework: 
   } else {
     jspmConfigFileName = baseUrl + '/config.js';
   }
-  const paths = parseJspmConfig(await fs.realpath(jspmConfigFileName), name => name.split('@').length > 1)
+  const paths = parseJspmConfig(await fs.realpath(jspmConfigFileName), name => name.split('@').length > 1 && !name.match(/aurelia-types-installer/))
     .filter(item => item.indexOf(`${framework}-`) > -1)
     .map(x => x.split(`${framework}-`)[1]);
 
