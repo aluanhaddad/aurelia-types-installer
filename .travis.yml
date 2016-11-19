@@ -8,6 +8,5 @@ before_script:
   - npm install
   - jspm install
   cd ..\..
-before_script:
   - npm install
   - npm test
