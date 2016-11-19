@@ -1,7 +1,7 @@
 import install from './install';
 import parseArgs from './parse-args';
 
-const help = 'Usage: ati install [--projectDir = .] [--framework = aurelia] [--dest = projectDir/types] [--explicitIndex = true]';
+const help = 'Usage: ati install [--projectDir = .] [--framework = aurelia] [--dest = projectDir/jspm_packages/npm] [--explicitIndex = true]';
 
 const args = parseArgs();
 
