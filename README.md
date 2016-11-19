@@ -1,6 +1,6 @@
 # aurelia-types-installer
 [![GitHub release](https://img.shields.io/github/release/aluanhaddad/aurelia-types-installer.svg)]()
-[![npm](https://img.shields.io/npm/v/aurelia-types-installer.svg)](aluanhaddad/aurelia-types-installer)
+[![npm](https://img.shields.io/npm/v/ng2-conventions-decorators.svg)](https://www.npmjs.com/package/aurelia-types-installer)
 [![npm](https://img.shields.io/npm/l/aurelia-types-installer.svg)](aluanhaddad/aurelia-types-installer)
 [![npm](https://img.shields.io/npm/dt/aurelia-types-installer.svg)](aluanhaddad/aurelia-types-installers)    
 [![Build Status](https://travis-ci.org/aluanhaddad/aurelia-types-installer.svg?branch=master)](https://travis-ci.org/aluanhaddad/aurelia-types-installer)
