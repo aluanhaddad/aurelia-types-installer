@@ -4,10 +4,10 @@ node_js:
   - "6.1"
   - "5.11"
 before_install: 
-  - cd test\\testapp 
+  - cd ./test/testapp 
   - npm install
   - npm i
   - jspm i
-  - cd ..\\..
+  - cd ./../..
   - npm install
   - npm test
