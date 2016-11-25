@@ -1,16 +1,21 @@
 {
-  "compileOnSave": true,
   "compilerOptions": {
     "module": "commonjs",
     "target": "es5",
     "lib": [
       "es2017"
     ],
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "sourceMap": true,
     "moduleResolution": "node",
     "strictNullChecks": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
     "outDir": "dist",
-    "rootDir": "src"
+    "rootDir": "src",
+    "traceResolution": false
   },
   "exclude": [
     "node_modules",

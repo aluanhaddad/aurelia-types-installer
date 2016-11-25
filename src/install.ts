@@ -52,7 +52,7 @@ export default async function install(options: { projectDir: string, framework: 
   if (!explicitIndex && !tsConfig.compilerOptions.moduleResolution && !generatedTsConfig.compilerOptions.moduleResolution) {
     generatedTsConfig.compilerOptions.moduleResolution = 'node';
   }
-  await fs.writeFile(baseUrl + '/tsconfig.paths.json', JSON.stringify(generatedTsConfig, (x, y) => y, 2));
+  await fs.writeFile(baseUrl + '/tsconfig.paths.json', JSON.stringify(generatedTsConfig, (_, value) => value, 2));
 }
 
 type TSConfig = {

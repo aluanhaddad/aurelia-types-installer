@@ -3,12 +3,11 @@ export default function imbue() {
     this, elementToArray?: (x) => R[],
     projection?: (x: R) => S) {
     const elementSelector = projection || ((e: any) => e);
-    const arraySelector = elementToArray || ((a, index) => {
-      if (Array.isArray(a)) {
-        return a.map(elementSelector);
-      } else {
+    const arraySelector = elementToArray || (a => {
+      if (!Array.isArray(a)) {
         throw TypeError('No projection to array provided and "this" and element');
       }
+      return a.map(elementSelector);
     });
     return this.map(arraySelector).reduce((x, y) => x.concat(y), []);
   };

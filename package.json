@@ -6,12 +6,12 @@
   },
   "description": "A utiltiy for Aurelia + TypeScript + JSPM users that installs exact .d.ts versions as external modules.",
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "prepublish": "npm run test && npm run build",
-    "cleantestapp": "rimraf test/testapp/jspm_packages/npm/**/*.ts && rimraf test/testapps/tsconfig.paths.json",
-    "clean": "rimraf dist && npm run cleantestapp",
+    "start": "tsc -p -w tsconfig.json",
+    "prepublish": "npm run build && npm run lint && npm run test",
+    "clean": "rimraf dist && rimraf test/testapp/jspm_packages/npm/**/*.ts && rimraf test/testapps/tsconfig.paths.json",
+    "build": "npm run clean && tsc -p tsconfig.json",
     "test": "node dist/index.js i --projectDir ./test/testapp --dest jspm_packages/npm",
-    "pretest": "npm run build"
+    "lint": "npm run build && tslint --project tsconfig.json --config tslint.json --format stylish"
   },
   "main": "dist/index",
   "author": "aluanh@gmail.com",
@@ -25,22 +25,23 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@types/minimist": "^1.1.28",
-    "@types/mz": "0.0.28",
-    "@types/request": "0.0.30",
-    "@types/request-promise": "^3.0.30",
-    "async": "^2.0.1",
+    "@types/minimist": "^1.1.29",
+    "@types/mz": "0.0.30",
+    "@types/request": "0.0.34",
+    "@types/request-promise": "^4.1.33",
+    "async": "^2.1.4",
     "minimist": "^1.2.0",
-    "mz": "^2.4.0",
-    "request": "^2.75.0",
+    "mz": "^2.6.0",
+    "request": "^2.79.0",
     "request-promise": "^4.1.1"
   },
   "devDependencies": {
-    "typescript": "2.1.0-dev.20160927",
-    "@types/tape": "^4.2.27",
+    "@types/tape": "^4.2.28",
     "jspm": "*",
-    "tape": "^4.6.0",
-    "rimraf": "2.5.4"
+    "rimraf": "2.5.4",
+    "tape": "^4.6.3",
+    "tslint": "^4.0.2",
+    "typescript": "next"
   },
   "keywords": [
     "aurelia",

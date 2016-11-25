@@ -2,7 +2,7 @@
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator.throw(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
         function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments)).next());
     });
@@ -108,7 +108,7 @@ function install(options) {
                     if (!explicitIndex && !tsConfig.compilerOptions.moduleResolution && !generatedTsConfig.compilerOptions.moduleResolution) {
                         generatedTsConfig.compilerOptions.moduleResolution = 'node';
                     }
-                    return [4 /*yield*/, mz_1.fs.writeFile(baseUrl + '/tsconfig.paths.json', JSON.stringify(generatedTsConfig, function (x, y) { return y; }, 2))];
+                    return [4 /*yield*/, mz_1.fs.writeFile(baseUrl + '/tsconfig.paths.json', JSON.stringify(generatedTsConfig, function (_, value) { return value; }, 2))];
                 case 8:
                     _h.sent();
                     return [2 /*return*/];

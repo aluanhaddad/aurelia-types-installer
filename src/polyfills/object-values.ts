@@ -8,9 +8,3 @@ export default function polyfillObjectValues() {
     };
   }
 }
-
-declare global {
-  export interface ObjectConstructor {
-    values(o: any): any[];
-  }
-}

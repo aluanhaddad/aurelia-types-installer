@@ -1,88 +1,96 @@
 {
-    "rules": {
-        "ban": [
-            [
-                "eval",
-                "setTimeout"
-            ]
-        ],
-        "class-name": true,
-        "curly": true,
-        "eofline": false,
-        "forin": true,
-        "no-internal-module": true,
-        "indent": [
-            true,
-            2
-        ],
-        "interface-name": [
-            false,
-            "never-prefix"
-        ],
-        "label-position": true,
-        "label-undefined": true,
-        "max-line-length": [
-            false
-        ],
-        "no-arg": true,
-        "no-bitwise": true,
-        "no-conditional-assignment": true,
-        "no-console": [
-            false
-        ],
-        "no-construct": true,
-        "no-debugger": true,
-        "no-duplicate-key": true,
-        "no-duplicate-variable": true,
-        "no-empty": false,
-        "no-eval": true,
-        "no-string-literal": true,
-        "no-switch-case-fall-through": true,
-        "no-trailing-whitespace": false,
-        "no-unreachable": true,
-        "no-unused-expression": true,
-        "no-use-before-declare": true,
-        "no-var-keyword": true,
-        "no-var-requires": true,
-        "no-unused-variable": [
-            true
-        ],
-        "no-angle-bracket-type-assertion": true,
-        "one-line": [
-            true,
-            "check-open-brace",
-            "check-catch",
-            "check-else",
-            "check-whitespace"
-        ],
-        "quotemark": [
-            true,
-            "single"
-        ],
-        "radix": true,
-        "semicolon": [
-            true,
-            "always"
-        ],
-        "switch-default": true,
-        "triple-equals": [
-            true
-        ],
-        "typedef-whitespace": [
-            true
-        ],
-        "use-strict": [
-            "check-function",
-            "check-module",
-            true
-        ],
-        "variable-name": [
-            true,
-            "allow-pascal-case"
-        ],
-        "whitespace": [
-            true
-        ],
-        "no-inferrable-types": true
-    }
+  "rules": {
+    "ban": [
+      [
+        "eval",
+        "setTimeout"
+      ]
+    ],
+    "class-name": true,
+    "curly": true,
+    "eofline": false,
+    "forin": true,
+    "no-internal-module": true,
+    "indent": [
+      true,
+      2
+    ],
+    "interface-name": [
+      false,
+      "never-prefix"
+    ],
+    "label-position": true,
+    "max-line-length": [
+      false
+    ],
+    "no-arg": true,
+    "no-bitwise": true,
+    "no-conditional-assignment": true,
+    "no-console": [
+      false
+    ],
+    "no-construct": true,
+    "no-debugger": true,
+    "no-duplicate-variable": true,
+    "no-empty": false,
+    "no-eval": true,
+    "no-string-literal": true,
+    "no-switch-case-fall-through": true,
+    "adjacent-overload-signatures": true,
+    "cyclomatic-complexity": [
+      true,
+      20
+    ],
+    "object-literal-shorthand": true,
+    "object-literal-key-quotes": [
+      true,
+      "as-needed"
+    ],
+    "no-trailing-whitespace": true,
+    "no-unused-expression": true,
+    "no-use-before-declare": true,
+    "no-var-keyword": true,
+    "no-var-requires": true,
+    "no-angle-bracket-type-assertion": true,
+    "one-line": [
+      true,
+      "check-else",
+      "check-open-brace",
+      "check-catch",
+      "check-finally",
+      "check-whitespace"
+    ],
+    "quotemark": [
+      true,
+      "single",
+      "avoid-escape"
+    ],
+    "radix": true,
+    "semicolon": [
+      true,
+      "always"
+    ],
+    "switch-default": false,
+    "triple-equals": true,
+    "typedef-whitespace": [
+      true
+    ],
+    "variable-name": [
+      true,
+      "allow-pascal-case"
+    ],
+    "whitespace": [
+      true,
+      "check-branch",
+      "check-decl",
+      "check-module",
+      "check-operator",
+      "check-separator",
+      "check-type",
+      "check-typecast"
+    ],
+    "no-inferrable-types": [
+      true
+    ]
+  }
 }
