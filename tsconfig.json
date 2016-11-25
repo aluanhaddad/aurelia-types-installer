@@ -8,6 +8,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "sourceMap": true,
+    "inlineSources": false,
     "moduleResolution": "node",
     "strictNullChecks": true,
     "noFallthroughCasesInSwitch": true,
@@ -15,6 +16,7 @@
     "alwaysStrict": true,
     "outDir": "dist",
     "rootDir": "src",
+    "listEmittedFiles": true,
     "traceResolution": false
   },
   "exclude": [
