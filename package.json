@@ -1,6 +1,6 @@
 {
   "name": "aurelia-types-installer",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "bin": {
     "ati": "./bin/ati"
   },
@@ -9,7 +9,7 @@
     "prepublish": "npm run build && npm run lint && npm test",
     "clean": "rimraf dist",
     "build": "npm run clean && tsc -v && tsc -p tsconfig.json",
-    "test": "node dist/index.js i --projectDir ./test/testapp --dest jspm_packages/npm",
+    "test": "ts-node src/index i --projectDir ./test/testapp --dest jspm_packages/npm",
     "pretest": "rimraf test/testapp/jspm_packages/npm/**/*.ts test/testapp/tsconfig.paths.json",
     "posttest": "npm run pretest",
     "lint": "tslint --project tsconfig.json --config tslint.json --format stylish"
@@ -38,11 +38,12 @@
   },
   "devDependencies": {
     "@types/tape": "^4.2.28",
-    "jspm": "*",
+    "jspm": "beta",
     "rimraf": "2.5.4",
     "tape": "^4.6.3",
-    "tslint": "^4.0.2",
-    "typescript": "next"
+    "tslint": "next",
+    "typescript": "next",
+    "ts-node": "latest"
   },
   "keywords": [
     "aurelia",

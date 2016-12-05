@@ -1,6 +1,5 @@
-import polyfill, { imbueArray } from './polyfills';
-polyfill();
-imbueArray();
+import './polyfills/enhance';
+
 import { ensureDir } from './ensure-dir';
 import downloadDeclaration from './aquire-declaration';
 import { fs } from 'mz';
@@ -57,7 +56,7 @@ export default async function install(options: { projectDir: string, framework: 
 
 type TSConfig = {
   compilerOptions: {
-    moduleResolution?: 'node' | 'classic',
+    moduleResolution?: 'node' | 'classic'
     baseUrl?: string
     paths: {
       [key: string]: string[]

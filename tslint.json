@@ -1,4 +1,5 @@
 {
+  "tsc": "",
   "rules": {
     "ban": [
       [
@@ -7,6 +8,17 @@
       ]
     ],
     "class-name": true,
+    "align": [
+      true
+    ],
+    "new-parens": true,
+    "no-unused-new": false,
+    "prefer-for-of": true,
+    "no-unsafe-finally": true,
+    "array-type": [
+      true,
+      "array"
+    ],
     "curly": true,
     "eofline": false,
     "forin": true,

@@ -34,9 +34,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var polyfills_1 = require("./polyfills");
-polyfills_1.default();
-polyfills_1.imbueArray();
+require("./polyfills/enhance");
 var ensure_dir_1 = require("./ensure-dir");
 var aquire_declaration_1 = require("./aquire-declaration");
 var mz_1 = require("mz");
