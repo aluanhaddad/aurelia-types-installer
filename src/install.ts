@@ -1,13 +1,17 @@
-import './polyfills/enhance';
-
-import { ensureDir } from './ensure-dir';
+﻿import './polyfills/enhance';
+import ensureDir from './ensure-dir';
 import downloadDeclaration from './aquire-declaration';
-import { fs } from 'mz';
-
+import {fs} from 'mz';
 import parseJspmConfig from './extract-jspm-config-paths';
 
-export default async function install(options: { projectDir: string, framework: string, dest: string, explicitIndex: boolean }) {
-  const {projectDir, framework, dest, explicitIndex} = options;
+export interface InstallOptions {
+  projectDir: string;
+  framework: string;
+  dest: string;
+  explicitIndex: boolean;
+}
+
+export default async function install({ projectDir, framework, dest, explicitIndex }: InstallOptions) {
   const baseUrl = await fs.realpath(projectDir);
 
   let jspmConfigFileName: string;
@@ -21,7 +25,9 @@ export default async function install(options: { projectDir: string, framework: 
     .map(x => x.split(`${framework}-`)[1]);
 
   await ensureDir(baseUrl + '/' + dest);
-  paths.forEach(async path => await downloadDeclaration(baseUrl, dest, path, framework));
+  await Promise.all(paths.map(async path => {
+    await downloadDeclaration(baseUrl, dest, path, framework);
+  }));
 
   let generatedTsConfigPath = baseUrl + '/tsconfig.paths.json';
   const tsConfig: TSConfig = require(await fs.realpath(baseUrl + '/tsconfig.json'));

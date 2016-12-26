@@ -1,6 +1,6 @@
-import { fs } from 'mz';
+﻿import { fs } from 'mz';
 
-export async function ensureDir(path: string) {
+export default async function ensureDir(path: string) {
   try {
     if (!(await fs.readdir(path))) {
       await fs.mkdir(path);
@@ -9,5 +9,4 @@ export async function ensureDir(path: string) {
   } catch (message) {
     console.error(message);
   }
-
 }

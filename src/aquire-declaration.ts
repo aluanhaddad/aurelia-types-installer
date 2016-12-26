@@ -1,5 +1,5 @@
 import { fs } from 'mz';
-import { ensureDir } from './ensure-dir';
+import ensureDir from './ensure-dir';
 import requestPromise = require('request-promise');
 
 export default async function retrieveFromGitHub(baseUrl: string, destinationDir: string, versionedName: string, prefix: string) {
