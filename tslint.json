@@ -1,4 +1,4 @@
-{
+﻿{
   "tsc": "",
   "rules": {
     "ban": [
@@ -28,19 +28,16 @@
       2
     ],
     "interface-name": [
-      false,
+      true,
       "never-prefix"
     ],
     "label-position": true,
     "max-line-length": [
-      false
+      true
     ],
     "no-arg": true,
     "no-bitwise": true,
     "no-conditional-assignment": true,
-    "no-console": [
-      false
-    ],
     "no-construct": true,
     "no-debugger": true,
     "no-duplicate-variable": true,
