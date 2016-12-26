@@ -1,7 +1,8 @@
-**/node_modules
+﻿**/node_modules
 **/jspm_packages
 /.vscode/**
 *.js.map
 *.min.js
 v15/**
 .vs/**
+/.idea
