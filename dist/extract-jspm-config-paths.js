@@ -20,7 +20,7 @@ function default_1(jspmConfigPath, predicate) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = default_1;
 function unrollWithFilter(o, predicate) {
-    if (!o || typeof o === 'number' || typeof o === 'boolaean') {
+    if (!o || typeof o === 'number' || typeof o === 'boolean') {
         return [];
     }
     return Object
