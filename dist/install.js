@@ -4,7 +4,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
         function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments)).next());
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
 var __generator = (this && this.__generator) || function (thisArg, body) {
@@ -39,15 +39,14 @@ var ensure_dir_1 = require("./ensure-dir");
 var aquire_declaration_1 = require("./aquire-declaration");
 var mz_1 = require("mz");
 var extract_jspm_config_paths_1 = require("./extract-jspm-config-paths");
-function install(options) {
+function install(_a) {
+    var projectDir = _a.projectDir, framework = _a.framework, dest = _a.dest, explicitIndex = _a.explicitIndex;
     return __awaiter(this, void 0, void 0, function () {
         var _this = this;
-        var projectDir, framework, dest, explicitIndex, baseUrl, jspmConfigFileName, _a, _b, _c, paths, _d, _e, generatedTsConfigPath, tsConfig, _f, _g, generatedTsConfig, compilerOptions;
+        var baseUrl, jspmConfigFileName, _a, _b, _c, paths, _d, _e, generatedTsConfigPath, tsConfig, _f, _g, generatedTsConfig, compilerOptions;
         return __generator(this, function (_h) {
             switch (_h.label) {
-                case 0:
-                    projectDir = options.projectDir, framework = options.framework, dest = options.dest, explicitIndex = options.explicitIndex;
-                    return [4 /*yield*/, mz_1.fs.realpath(projectDir)];
+                case 0: return [4 /*yield*/, mz_1.fs.realpath(projectDir)];
                 case 1:
                     baseUrl = _h.sent();
                     _b = (_a = mz_1.fs).exists;
@@ -66,22 +65,28 @@ function install(options) {
                     paths = _d.apply(void 0, [_h.sent(), function (name) { return name.split('@').length > 1 && !name.match(/aurelia-types-installer/); }])
                         .filter(function (item) { return item.indexOf(framework + "-") > -1; })
                         .map(function (x) { return x.split(framework + "-")[1]; });
-                    return [4 /*yield*/, ensure_dir_1.ensureDir(baseUrl + '/' + dest)];
+                    return [4 /*yield*/, ensure_dir_1.default(baseUrl + '/' + dest)];
                 case 5:
                     _h.sent();
-                    paths.forEach(function (path) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
-                        switch (_a.label) {
-                            case 0: return [4 /*yield*/, aquire_declaration_1.default(baseUrl, dest, path, framework)];
-                            case 1: return [2 /*return*/, _a.sent()];
-                        }
-                    }); }); });
+                    return [4 /*yield*/, Promise.all(paths.map(function (path) { return __awaiter(_this, void 0, void 0, function () {
+                            return __generator(this, function (_a) {
+                                switch (_a.label) {
+                                    case 0: return [4 /*yield*/, aquire_declaration_1.default(baseUrl, dest, path, framework)];
+                                    case 1:
+                                        _a.sent();
+                                        return [2 /*return*/];
+                                }
+                            });
+                        }); }))];
+                case 6:
+                    _h.sent();
                     generatedTsConfigPath = baseUrl + '/tsconfig.paths.json';
                     _f = require;
                     return [4 /*yield*/, mz_1.fs.realpath(baseUrl + '/tsconfig.json')];
-                case 6:
+                case 7:
                     tsConfig = _f.apply(void 0, [_h.sent()]);
                     return [4 /*yield*/, mz_1.fs.exists(generatedTsConfigPath)];
-                case 7:
+                case 8:
                     if (_h.sent()) {
                         generatedTsConfig = require(generatedTsConfigPath);
                     }
@@ -107,7 +112,7 @@ function install(options) {
                         generatedTsConfig.compilerOptions.moduleResolution = 'node';
                     }
                     return [4 /*yield*/, mz_1.fs.writeFile(baseUrl + '/tsconfig.paths.json', JSON.stringify(generatedTsConfig, function (_, value) { return value; }, 2))];
-                case 8:
+                case 9:
                     _h.sent();
                     return [2 /*return*/];
             }

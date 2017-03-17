@@ -4,7 +4,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
         function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments)).next());
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
 var __generator = (this && this.__generator) || function (thisArg, body) {
@@ -46,7 +46,7 @@ function retrieveFromGitHub(baseUrl, destinationDir, versionedName, prefix) {
                     _a = nameAndVesion(versionedName), name = _a.name, version = _a.version;
                     url = "https://raw.githubusercontent.com/" + prefix + "/" + name + "/" + version + "/dist/" + prefix + "-" + name + ".d.ts";
                     destDir = baseUrl + "/" + destinationDir + "/" + prefix + "-" + name + "@" + version;
-                    return [4 /*yield*/, ensure_dir_1.ensureDir(destDir)];
+                    return [4 /*yield*/, ensure_dir_1.default(destDir)];
                 case 1:
                     _b.sent();
                     return [4 /*yield*/, requestPromise(url, { method: 'GET' })];
