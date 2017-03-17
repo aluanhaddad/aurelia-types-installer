@@ -19,7 +19,7 @@ export default function (jspmConfigPath: string, predicate: (packageName: string
 
 
 function unrollWithFilter(o, predicate: (packageName: string) => boolean): string[] {
-  if (!o || typeof o === 'number' || typeof o === 'boolaean') {
+  if (!o || typeof o === 'number' || typeof o === 'boolean') {
     return [];
   }
   return Object
