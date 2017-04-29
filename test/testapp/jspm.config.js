@@ -206,7 +206,8 @@ SystemJS.config({
             "plugin-typescript": "github:frankwallis/plugin-typescript@5.1.1",
             "readline": "npm:jspm-nodelibs-readline@0.2.0",
             "babel-plugin-transform-es2015-typeof-symbol": "npm:babel-plugin-transform-es2015-typeof-symbol@6.8.0",
-            "net": "npm:jspm-nodelibs-net@0.2.0"
+            "net": "npm:jspm-nodelibs-net@0.2.0",
+            "module": "npm:jspm-nodelibs-module@0.2.0"
         },
         "packages": {
             "github:frankwallis/plugin-typescript@5.1.1": {
@@ -217,6 +218,16 @@ SystemJS.config({
             "npm:babel-plugin-transform-es2015-typeof-symbol@6.8.0": {
                 "map": {
                     "babel-runtime": "npm:babel-runtime@6.11.6"
+                }
+            },
+            "npm:typescript@next": {
+                "map": {
+                    "source-map-support": "npm:source-map-support@0.4.15"
+                }
+            },
+            "npm:source-map-support@0.4.15": {
+                "map": {
+                    "source-map": "npm:source-map@0.5.6"
                 }
             }
         }
@@ -242,7 +253,6 @@ SystemJS.config({
         "https": "npm:jspm-nodelibs-https@0.2.0",
         "jquery": "npm:jquery@2.2.4",
         "jquery-contextmenu": "npm:jquery-contextmenu@2.2.4",
-        "module": "npm:jspm-nodelibs-module@0.2.0",
         "punycode": "npm:jspm-nodelibs-punycode@0.2.0",
         "querystring": "npm:jspm-nodelibs-querystring@0.2.0",
         "sass": "github:mobilexag/plugin-sass@0.4.6",
@@ -298,7 +308,7 @@ SystemJS.config({
         "fs": "npm:jspm-nodelibs-fs@0.2.0",
         "os": "npm:jspm-nodelibs-os@0.2.0",
         "path": "npm:jspm-nodelibs-path@0.2.0",
-        "process": "npm:jspm-nodelibs-process@0.2.0",
+        "process": "github:jspm/nodelibs-process@0.2.0-alpha",
         "stream": "npm:jspm-nodelibs-stream@0.2.0",
         "string_decoder": "npm:jspm-nodelibs-string_decoder@0.2.0",
         "util": "npm:jspm-nodelibs-util@0.2.0",

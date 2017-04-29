@@ -7,7 +7,7 @@ export {
   addObjectEntries,
   addObjectValues,
   imbueArray
-}
+};
 export default function addObjectPolyfills() {
   addObjectAssign();
   addObjectEntries();

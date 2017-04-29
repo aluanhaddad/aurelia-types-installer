@@ -18,6 +18,7 @@
     },
     "devDependencies": {
       "babel-plugin-transform-es2015-typeof-symbol": "npm:babel-plugin-transform-es2015-typeof-symbol@^6.8.0",
+      "module": "npm:jspm-nodelibs-module@^0.2.0",
       "net": "npm:jspm-nodelibs-net@^0.2.0",
       "plugin-typescript": "github:frankwallis/plugin-typescript@^5.0.9",
       "readline": "npm:jspm-nodelibs-readline@^0.2.0"
@@ -54,7 +55,7 @@
       "fs": "npm:jspm-nodelibs-fs@^0.2.0",
       "os": "npm:jspm-nodelibs-os@^0.2.0",
       "path": "npm:jspm-nodelibs-path@^0.2.0",
-      "process": "npm:jspm-nodelibs-process@^0.2.0",
+      "process": "github:jspm/nodelibs-process@^0.2.0-alpha",
       "stream": "npm:jspm-nodelibs-stream@^0.2.0",
       "string_decoder": "npm:jspm-nodelibs-string_decoder@^0.2.0",
       "util": "npm:jspm-nodelibs-util@^0.2.0",
@@ -94,11 +95,24 @@
       "npm:ms@0.7.1": {
         "jspmNodeConversion": false,
         "format": "cjs"
+      },
+      "npm:typescript@next": {
+        "browser": {},
+        "map": {
+          "buffer": "@empty",
+          "child_process": "@empty",
+          "fs": "@empty",
+          "path": "@empty",
+          "process": "@empty",
+          "readline": "@empty"
+        },
+        "dependencies": {
+          "source-map-support": "*"
+        }
       }
     }
   },
   "devDependencies": {
     "jspm": "^0.17.0-beta.32"
   }
-}
-
+}

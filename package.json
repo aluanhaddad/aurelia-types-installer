@@ -43,7 +43,7 @@
     "source-map-support": "^0.4.10",
     "tape": "^4.6.3",
     "ts-node": "latest",
-    "tslint": "latest",
+    "tslint": "^5.1.0",
     "typescript": "next"
   },
   "keywords": [

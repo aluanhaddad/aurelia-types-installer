@@ -12,7 +12,6 @@
     ],
     "no-any": true,
     "new-parens": true,
-    "no-unused-new": false,
     "prefer-for-of": true,
     "no-unsafe-finally": true,
     "array-type": [
@@ -60,7 +59,6 @@
     ],
     "no-trailing-whitespace": true,
     "no-unused-expression": true,
-    "no-use-before-declare": true,
     "no-var-keyword": true,
     "no-var-requires": true,
     "no-angle-bracket-type-assertion": true,

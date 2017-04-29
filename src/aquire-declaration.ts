@@ -13,7 +13,7 @@ export default async function retrieveFromGitHub(baseUrl: string, destinationDir
   const data = await requestPromise(url, {method: 'GET'}) as string;
   await save({baseUrl, destinationDir, versionedName, prefix}, data);
   return `${baseUrl}/${destinationDir}/${prefix}-${name}@${version}/${prefix}-${name}`;
-};
+}
 
 async function save({baseUrl, destinationDir, versionedName, prefix}: {destinationDir: string, baseUrl: string, versionedName: string, prefix: string}, declaration: string) {
   const {name, version} = nameAndVesion(versionedName);
