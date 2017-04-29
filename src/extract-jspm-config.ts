@@ -23,11 +23,9 @@ function unrollWithFilter(o: object, predicate: (packageName: string) => boolean
     return [];
   }
   return Object
-    .entries(o)
-    .filter(([key]) => key === 'packages' || key === 'map')
-    .map(([_, value]) => value)
+    .values(o)
     .flatMap(value => typeof value !== 'string'
       ? unrollWithFilter(value, predicate)
       : [value])
-    .filter(value => typeof value === 'string' && predicate(value));
+    .filter(value => typeof value === 'string' && predicate(value) && !value.endsWith('js'));
 }

@@ -2,6 +2,7 @@
 import ensureDir from './ensure-dir';
 import downloadDeclaration from './aquire-declaration';
 import {fs} from 'mz';
+import path = require('path');
 import extractJspmConfig from './extract-jspm-config';
 
 export interface InstallOptions {
@@ -16,9 +17,9 @@ export default async function install({projectDir, framework, dest, explicitInde
 
   let jspmConfigFileName: string;
   if (await fs.exists(await fs.realpath(baseUrl + '/jspm.config.js'))) {
-    jspmConfigFileName = baseUrl + '/jspm.config.js';
+    jspmConfigFileName = baseUrl + path.sep + 'jspm.config.js';
   } else {
-    jspmConfigFileName = baseUrl + '/config.js';
+    jspmConfigFileName = baseUrl + path.sep + 'config.js';
   }
   const paths = extractJspmConfig(await fs.realpath(jspmConfigFileName), name => name.split('@').length > 1 && !name.match(/aurelia-types-installer/))
     .filter(item => item.indexOf(`${framework}-`) > -1)
@@ -29,8 +30,8 @@ export default async function install({projectDir, framework, dest, explicitInde
     await downloadDeclaration(baseUrl, dest, path, framework);
   }));
 
-  let generatedTsConfigPath = baseUrl + '/tsconfig.paths.json';
-  const tsConfig: TSConfig = require(await fs.realpath(baseUrl + '/tsconfig.json'));
+  let generatedTsConfigPath = baseUrl + path.sep + 'tsconfig.paths.json';
+  const tsConfig: TSConfig = require(await fs.realpath(baseUrl + path.sep + 'tsconfig.json'));
   let generatedTsConfig: TSConfig;
   if (await fs.exists(generatedTsConfigPath)) {
     generatedTsConfig = require(generatedTsConfigPath) as TSConfig;
@@ -56,7 +57,7 @@ export default async function install({projectDir, framework, dest, explicitInde
   if (!explicitIndex && !tsConfig.compilerOptions.moduleResolution && !generatedTsConfig.compilerOptions.moduleResolution) {
     generatedTsConfig.compilerOptions.moduleResolution = 'node';
   }
-  await fs.writeFile(baseUrl + '/tsconfig.paths.json', JSON.stringify(generatedTsConfig, (_, value) => value, 2));
+  await fs.writeFile(baseUrl + path.sep + 'tsconfig.paths.json', JSON.stringify(generatedTsConfig, (_, value) => value, 2));
 }
 
 type TSConfig = {
