@@ -5,24 +5,21 @@
     "lib": [
       "es2017"
     ],
+    "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "sourceMap": true,
-    "inlineSources": false,
     "moduleResolution": "node",
-    "strictNullChecks": true,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitThis": true,
-    "alwaysStrict": true,
+    "experimentalDecorators": true,
     "outDir": "dist",
     "rootDir": "src",
-    "listEmittedFiles": true,
-    "traceResolution": false
+    "listEmittedFiles": true
   },
   "exclude": [
     "node_modules",
     "jspm_packages",
-    "/test/testapp/",
+    "test/testapp",
     "test"
   ]
 }

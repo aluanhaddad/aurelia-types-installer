@@ -1,8 +1,8 @@
 export default function imbue() {
   Array.prototype.flatMap = function flatMap<R, S>(
-    this, elementToArray?: (x) => R[],
+    this, elementToArray?: (x: {}) => R[],
     projection?: (x: R) => S) {
-    const elementSelector = projection || ((e: any) => e);
+    const elementSelector = projection || ((e: {}) => e);
     const arraySelector = elementToArray || (a => {
       if (!Array.isArray(a)) {
         throw TypeError('No projection to array provided and "this" and element');

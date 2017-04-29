@@ -1,7 +1,9 @@
 import minimist = require('minimist');
-export default function () {
-  const {  _, projectDir, framework, dest, explicitIndex } = minimist(process.argv.slice(2), {
-    alias: { install: 'i' }, default: {
+import {InstallOptions} from './install';
+export default function parseArgs() {
+  const {_: [command], projectDir, framework, dest, explicitIndex} = minimist(process.argv.slice(2), {
+    alias: {install: 'i'},
+    default: {
       projectDir: '.',
       framework: 'aurelia',
       dest: 'jspm_packages/npm',
@@ -9,5 +11,9 @@ export default function () {
     },
     '--': true
   });
-  return { command: _[0], projectDir, framework, dest, explicitIndex };
+  return {command, projectDir, framework, dest, explicitIndex};
+}
+
+declare module 'minimist' {
+  function minimist(args?: string[], opts?: minimist.Opts): {[P in keyof InstallOptions]?: InstallOptions[P]};
 }

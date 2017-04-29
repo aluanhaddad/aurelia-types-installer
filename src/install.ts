@@ -2,7 +2,7 @@
 import ensureDir from './ensure-dir';
 import downloadDeclaration from './aquire-declaration';
 import {fs} from 'mz';
-import parseJspmConfig from './extract-jspm-config-paths';
+import extractJspmConfig from './extract-jspm-config';
 
 export interface InstallOptions {
   projectDir: string;
@@ -20,7 +20,7 @@ export default async function install({ projectDir, framework, dest, explicitInd
   } else {
     jspmConfigFileName = baseUrl + '/config.js';
   }
-  const paths = parseJspmConfig(await fs.realpath(jspmConfigFileName), name => name.split('@').length > 1 && !name.match(/aurelia-types-installer/))
+  const paths = extractJspmConfig(await fs.realpath(jspmConfigFileName), name => name.split('@').length > 1 && !name.match(/aurelia-types-installer/))
     .filter(item => item.indexOf(`${framework}-`) > -1)
     .map(x => x.split(`${framework}-`)[1]);
 
@@ -49,7 +49,6 @@ export default async function install({ projectDir, framework, dest, explicitInd
     });
   }
   const {compilerOptions} = generatedTsConfig;
-
 
   paths.forEach(name => {
     compilerOptions.paths[`${framework}-${name.split('@')[0]}`] = [`${dest}/${framework}-${name}${explicitIndex ? '/index' : ''}`];

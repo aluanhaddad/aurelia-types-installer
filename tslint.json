@@ -1,5 +1,4 @@
 ﻿{
-  "tsc": "",
   "rules": {
     "ban": [
       [
@@ -11,6 +10,7 @@
     "align": [
       true
     ],
+    "no-any": true,
     "new-parens": true,
     "no-unused-new": false,
     "prefer-for-of": true,
@@ -36,6 +36,9 @@
       true
     ],
     "no-arg": true,
+    "no-consecutive-blank-lines": [
+      true
+    ],
     "no-bitwise": true,
     "no-conditional-assignment": true,
     "no-construct": true,

@@ -1,7 +1,7 @@
 export default function polyfillObjectAssign() {
   if (typeof Object.assign !== 'function') {
-    Object.assign = function (target, ...args) {
-
+    // tslint:disable-next-line:no-any
+    Object.assign = function (target: any, ...args: any[]) {
       if (!target) {
         throw TypeError('Cannot convert undefined or null to object');
       }

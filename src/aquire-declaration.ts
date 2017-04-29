@@ -1,4 +1,4 @@
-import { fs } from 'mz';
+import {fs} from 'mz';
 import ensureDir from './ensure-dir';
 import requestPromise = require('request-promise');
 
@@ -10,19 +10,19 @@ export default async function retrieveFromGitHub(baseUrl: string, destinationDir
   const destDir = `${baseUrl}/${destinationDir}/${prefix}-${name}@${version}`;
   await ensureDir(destDir);
 
-  const data = await requestPromise(url, { method: 'GET' }) as string;
-  await save(baseUrl, destinationDir, versionedName, data, prefix);
+  const data = await requestPromise(url, {method: 'GET'}) as string;
+  await save({baseUrl, destinationDir, versionedName, prefix}, data);
   return `${baseUrl}/${destinationDir}/${prefix}-${name}@${version}/${prefix}-${name}`;
 };
 
-async function save(baseUrl, destinationDir, versionedName: string, dts: string, prefix: string) {
+async function save({baseUrl, destinationDir, versionedName, prefix}: {destinationDir: string, baseUrl: string, versionedName: string, prefix: string}, declaration: string) {
   const {name, version} = nameAndVesion(versionedName);
   const targetFile = `${baseUrl}/${destinationDir}/${prefix}-${name}@${version}/index.d.ts`;
-  const file = fs.createWriteStream(targetFile, { encoding: 'UTF8' });
-  await file.write(dts);
+  const file = fs.createWriteStream(targetFile, {encoding: 'UTF8'});
+  await file.write(declaration);
 }
 
 function nameAndVesion(versionedName: string) {
   const [name, version] = versionedName.split('@');
-  return { name, version };
+  return {name, version};
 }

@@ -1,6 +1,7 @@
 export default function polyfillObjectValues() {
   if (typeof Object.values !== 'function') {
-    Object.values = o => {
+    // tslint:disable-next-line:no-any
+    Object.values = (o: any) => {
       if (!Object) {
         throw TypeError('Cannot convert undefined or null to object');
       }

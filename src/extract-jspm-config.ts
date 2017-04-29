@@ -1,9 +1,9 @@
-export default function (jspmConfigPath: string, predicate: (packageName: string) => boolean) {
-  const jspmConfig = {} as { [key: string]: any };
+export default function extractJspmConfig(jspmConfigPath: string, predicate: (packageName: string) => boolean) {
+  const jspmConfig = {} as {[key: string]: {}};
   const SystemJSRestore = global.global.SystemJS;
   global.global.SystemJS = {
     config: config => {
-      return Object.keys(config).map(key => [key, config[key]] as [string, any]).reduce((cfg, [key, value]) => {
+      return Object.keys(config).map(key => [key, config[key]] as [string, {}]).reduce((cfg, [key, value]) => {
         cfg[key] = value;
         return cfg;
       }, jspmConfig);
@@ -16,9 +16,7 @@ export default function (jspmConfigPath: string, predicate: (packageName: string
   return unrollWithFilter(jspmConfig, predicate);
 }
 
-
-
-function unrollWithFilter(o, predicate: (packageName: string) => boolean): string[] {
+function unrollWithFilter(o: object, predicate: (packageName: string) => boolean): string[] {
   if (!o || typeof o === 'number' || typeof o === 'boolean') {
     return [];
   }
