@@ -1,3 +1,5 @@
+import './polyfills/imbue-array';
+
 export default function extractJspmConfig(jspmConfigPath: string, predicate: (packageName: string) => boolean) {
   const jspmConfig = {} as {[key: string]: {}};
   const SystemJSRestore = global.global.SystemJS;
@@ -21,7 +23,9 @@ function unrollWithFilter(o: object, predicate: (packageName: string) => boolean
     return [];
   }
   return Object
-    .values(o)
+    .entries(o)
+    .filter(([key]) => key === 'packages' || key === 'map')
+    .map(([_, value]) => value)
     .flatMap(value => typeof value !== 'string'
       ? unrollWithFilter(value, predicate)
       : [value])

@@ -11,7 +11,7 @@ export interface InstallOptions {
   explicitIndex: boolean;
 }
 
-export default async function install({ projectDir, framework, dest, explicitIndex }: InstallOptions) {
+export default async function install({projectDir, framework, dest, explicitIndex}: InstallOptions) {
   const baseUrl = await fs.realpath(projectDir);
 
   let jspmConfigFileName: string;
