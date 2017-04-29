@@ -63,7 +63,7 @@
     "overrides": {
       "github:frankwallis/plugin-typescript@5.1.1": {
         "dependencies": {
-          "typescript": "npm:typescript@2.1.0-dev.20160821"
+          "typescript": "npm:typescript@next"
         }
       },
       "npm:debug@2.2.0": {
@@ -100,4 +100,5 @@
   "devDependencies": {
     "jspm": "^0.17.0-beta.32"
   }
-}
+}
+
