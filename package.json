@@ -1,12 +1,12 @@
 {
   "name": "aurelia-types-installer",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "bin": {
     "ati": "./bin/ati"
   },
   "description": "A utiltiy for Aurelia + TypeScript + JSPM users that installs exact .d.ts versions as external modules.",
   "scripts": {
-    "prepublish": "npm run build && npm run lint && npm test",
+    "prepublish": "npm run lint && npm test && npm run build",
     "clean": "rimraf dist",
     "build": "npm run clean && tsc -v && tsc -p tsconfig.json",
     "test": "ts-node src/index i --projectDir ./test/testapp --dest jspm_packages/npm",
