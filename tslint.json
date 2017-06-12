@@ -1,4 +1,5 @@
 ﻿{
+  "defaultSeverity": "warning",
   "rules": {
     "ban": [
       [
