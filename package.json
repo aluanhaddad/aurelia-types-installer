@@ -12,7 +12,7 @@
     "test": "ts-node src/index i --projectDir ./test/testapp --dest jspm_packages/npm",
     "pretest": "rimraf test/testapp/jspm_packages/npm/**/*.ts test/testapp/tsconfig.paths.json",
     "posttest": "npm run pretest",
-    "lint": "tslint --project tsconfig.json --config tslint.json --format stylish --default-severity error"
+    "lint": "tslint --project tsconfig.json --config tslint.json --format stylish"
   },
   "main": "dist/index",
   "author": "aluanh@gmail.com",
