@@ -1,18 +1,26 @@
 import install from './install';
 import parseArgs from './parse-args';
-import {version} from '../package.json';
+import {version as atiVersion} from '../package.json';
 
 const help = 'Usage: ati install [--projectDir = .] [--framework = aurelia] [--dest = projectDir/jspm_packages/npm] [--explicitIndex = true]';
 
-const {command, ...args} = parseArgs();
+const {command, framework, version, ...args} = parseArgs();
+
+if (version) {
+  info(atiVersion);
+  process.exit(0);
+}
 
 switch (command) {
-  case 'version': info(version);
-    break;
+
   case 'install':
   case 'i':
-    install(args)
-      .then(info.bind('Complete'))
+    info(`installing ${framework} typings...`);
+    install({framework, ...args})
+      .then(results => {
+        info('\n', results.summary);
+        return results;
+      })
       .catch(console.error.bind(console));
     break;
   default:
@@ -21,6 +29,5 @@ switch (command) {
 }
 
 function info(...args: {}[]) {
-  console.info(`aurelia-types-installer ${version}`);
-  console.info(args);
+  console.info(...args);
 }
