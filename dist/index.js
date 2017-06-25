@@ -7,6 +7,41 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     }
     return t;
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
 var __rest = (this && this.__rest) || function (s, e) {
     var t = {};
     for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
@@ -20,32 +55,55 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var install_1 = require("./install");
 var parse_args_1 = require("./parse-args");
 var package_json_1 = require("../package.json");
-var help = 'Usage: ati install [--projectDir = .] [--framework = aurelia] [--dest = projectDir/jspm_packages/npm] [--explicitIndex = true]';
-var _a = parse_args_1.default(), command = _a.command, framework = _a.framework, version = _a.version, args = __rest(_a, ["command", "framework", "version"]);
-if (version) {
-    info(package_json_1.version);
-    process.exit(0);
-}
-switch (command) {
-    case 'install':
-    case 'i':
-        info("installing " + framework + " typings...");
-        install_1.default(__assign({ framework: framework }, args))
-            .then(function (results) {
-            info('\n', results.summary);
-            return results;
-        })
-            .catch(console.error.bind(console));
-        break;
-    default:
-        info(help);
-        process.exit(0);
-}
-function info() {
-    var args = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        args[_i] = arguments[_i];
-    }
-    console.info.apply(console, args);
-}
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zcmMvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBLHFDQUFnQztBQUNoQywyQ0FBcUM7QUFDckMsZ0RBQXNEO0FBRXRELElBQU0sSUFBSSxHQUFHLGdJQUFnSSxDQUFDO0FBRTlJLElBQU0sMkJBQW9ELEVBQW5ELG9CQUFPLEVBQUUsd0JBQVMsRUFBRSxvQkFBTyxFQUFFLHNEQUFzQixDQUFDO0FBRTNELEVBQUUsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUM7SUFDWixJQUFJLENBQUMsc0JBQVUsQ0FBQyxDQUFDO0lBQ2pCLE9BQU8sQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDLENBQUM7QUFDbEIsQ0FBQztBQUVELE1BQU0sQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUM7SUFFaEIsS0FBSyxTQUFTLENBQUM7SUFDZixLQUFLLEdBQUc7UUFDTixJQUFJLENBQUMsZ0JBQWMsU0FBUyxnQkFBYSxDQUFDLENBQUM7UUFDM0MsaUJBQU8sWUFBRSxTQUFTLFdBQUEsSUFBSyxJQUFJLEVBQUU7YUFDMUIsSUFBSSxDQUFDLFVBQUEsT0FBTztZQUNYLElBQUksQ0FBQyxJQUFJLEVBQUUsT0FBTyxDQUFDLE9BQU8sQ0FBQyxDQUFDO1lBQzVCLE1BQU0sQ0FBQyxPQUFPLENBQUM7UUFDakIsQ0FBQyxDQUFDO2FBQ0QsS0FBSyxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUM7UUFDdEMsS0FBSyxDQUFDO0lBQ1I7UUFDRSxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDWCxPQUFPLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQyxDQUFDO0FBQ3BCLENBQUM7QUFFRDtJQUFjLGNBQWE7U0FBYixVQUFhLEVBQWIscUJBQWEsRUFBYixJQUFhO1FBQWIseUJBQWE7O0lBQ3pCLE9BQU8sQ0FBQyxJQUFJLE9BQVosT0FBTyxFQUFTLElBQUksRUFBRTtBQUN4QixDQUFDIn0=
+var usage = 'Usage: ati install [--projectDir = .] [--framework = aurelia] [--dest = projectDir/jspm_packages/npm] [--explicitIndex = true]';
+var _a = parse_args_1.default(), command = _a.command, framework = _a.framework, version = _a.version, help = _a.help, args = __rest(_a, ["command", "framework", "version", "help"]);
+(function () {
+    return __awaiter(this, void 0, void 0, function () {
+        function info() {
+            var args = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                args[_i] = arguments[_i];
+            }
+            console.info.apply(console, args);
+        }
+        var _a, results, e_1;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    _a = command;
+                    switch (_a) {
+                        case 'install': return [3 /*break*/, 1];
+                        case 'i': return [3 /*break*/, 1];
+                    }
+                    return [3 /*break*/, 6];
+                case 1:
+                    info("installing " + framework + " typings...");
+                    _b.label = 2;
+                case 2:
+                    _b.trys.push([2, 4, , 5]);
+                    return [4 /*yield*/, install_1.default(__assign({ framework: framework }, args))];
+                case 3:
+                    results = _b.sent();
+                    info('\n', results.summary);
+                    return [3 /*break*/, 5];
+                case 4:
+                    e_1 = _b.sent();
+                    console.error.bind(e_1);
+                    return [3 /*break*/, 5];
+                case 5: return [3 /*break*/, 7];
+                case 6:
+                    if (version) {
+                        info(package_json_1.version);
+                        process.exit(0);
+                    }
+                    else if (help) {
+                        info(usage);
+                        process.exit(0);
+                    }
+                    _b.label = 7;
+                case 7: return [2 /*return*/];
+            }
+        });
+    });
+}());
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zcmMvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEscUNBQWdDO0FBQ2hDLDJDQUFxQztBQUNyQyxnREFBc0Q7QUFFdEQsSUFBTSxLQUFLLEdBQUcsZ0lBQWdJLENBQUM7QUFFL0ksSUFBTSwyQkFBMEQsRUFBekQsb0JBQU8sRUFBRSx3QkFBUyxFQUFFLG9CQUFPLEVBQUUsY0FBSSxFQUFFLDhEQUFzQixDQUFDO0FBRWpFLENBQUM7O1FBc0JDO1lBQWMsY0FBYTtpQkFBYixVQUFhLEVBQWIscUJBQWEsRUFBYixJQUFhO2dCQUFiLHlCQUFhOztZQUN6QixPQUFPLENBQUMsSUFBSSxPQUFaLE9BQU8sRUFBUyxJQUFJLEVBQUU7UUFDeEIsQ0FBQzs7Ozs7b0JBdkJPLEtBQUEsT0FBTyxDQUFBOzs2QkFDUixTQUFTLEVBQVQsTUFBTSxrQkFBRzs2QkFDVCxHQUFHLEVBQUgsTUFDVCxrQkFEWTs7OztvQkFDTixJQUFJLENBQUMsZ0JBQWMsU0FBUyxnQkFBYSxDQUFDLENBQUM7Ozs7b0JBRXpCLHFCQUFNLGlCQUFPLFlBQUUsU0FBUyxXQUFBLElBQUssSUFBSSxFQUFFLEVBQUE7O29CQUE3QyxPQUFPLEdBQUcsU0FBbUM7b0JBQ25ELElBQUksQ0FBQyxJQUFJLEVBQUUsT0FBTyxDQUFDLE9BQU8sQ0FBQyxDQUFDOzs7O29CQUU1QixPQUFPLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxHQUFDLENBQUMsQ0FBQzs7d0JBRXhCLHdCQUFNOztvQkFFTixFQUFFLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDO3dCQUNaLElBQUksQ0FBQyxzQkFBVSxDQUFDLENBQUM7d0JBQ2pCLE9BQU8sQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDLENBQUM7b0JBQ2xCLENBQUM7b0JBQUMsSUFBSSxDQUFDLEVBQUUsQ0FBQyxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUM7d0JBQ2hCLElBQUksQ0FBQyxLQUFLLENBQUMsQ0FBQzt3QkFDWixPQUFPLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQyxDQUFDO29CQUNsQixDQUFDOzs7Ozs7Q0FNTixFQUFFLENBQUMsQ0FBQyJ9

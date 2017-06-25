@@ -87,9 +87,9 @@ export default async function install({projectDir, framework, dest, explicitInde
   };
 
   function buildSummary() {
-    const overview = `installed ${successes.length} ${framework} typings\n\nsummary\ninstalled typings for ${successes.length} aurelia-packages:\n:${successes.map(success => ' - ' + success).join(`\n`)}`;
+    const overview = `installed ${successes.length} ${framework} typings\n\nsummary\ninstalled typings for ${successes.length} aurelia-packages:\n\n${successes.map(success => ' - ' + success).join(`\n`)}`;
     const errors = failures.length
-      ? `\nunable to locate typings for ${failures.length} ${framework} packages: \n${failures.map(({message}) => ` - ${message}`).join(`\n`)}`
+      ? `\nunable to locate typings for ${failures.length} ${framework} packages:\n\n${failures.map(({message}) => ` - ${framework}-${message}`).join(`\n`)}`
       : '';
     return overview + '\n' + errors;
   }

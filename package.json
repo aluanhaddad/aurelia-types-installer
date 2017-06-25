@@ -7,11 +7,10 @@
   "description": "A utiltiy for Aurelia + TypeScript + JSPM users that installs exact .d.ts versions as external modules.",
   "scripts": {
     "prepublish": "npm run lint && npm test && npm run build",
-    "clean": "rimraf dist",
+    "clean": "rimraf dist && npm run pretest",
     "build": "npm run clean && tsc -v && tsc -p tsconfig.json",
     "test": "ts-node src/index i --projectDir ./test/testapp --dest jspm_packages/npm",
-    "pretest": "rimraf test/testapp/jspm_packages/npm/**/*.ts test/testapp/tsconfig.paths.json",
-    "posttest": "npm run pretest",
+    "pretest": "rimraf test/testapp/jspm_packages/npm/**/*.ts test/testapp/tsconfig.paths.json && cd test/testapp && jspm i",
     "lint": "tslint --project tsconfig.json --config tslint.json --format stylish"
   },
   "main": "dist/index",
