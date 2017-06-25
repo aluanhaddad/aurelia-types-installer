@@ -38,7 +38,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var mz_1 = require("mz");
 function ensureDir(path) {
     return __awaiter(this, void 0, void 0, function () {
-        var message_1;
+        var e_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -52,13 +52,12 @@ function ensureDir(path) {
                     _a.label = 3;
                 case 3: return [3 /*break*/, 5];
                 case 4:
-                    message_1 = _a.sent();
-                    console.error(message_1);
-                    return [3 /*break*/, 5];
+                    e_1 = _a.sent();
+                    throw e_1;
                 case 5: return [2 /*return*/];
             }
         });
     });
 }
 exports.default = ensureDir;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZW5zdXJlLWRpci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uL3NyYy9lbnN1cmUtZGlyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSx5QkFBd0I7QUFFeEIsbUJBQXdDLElBQVk7Ozs7Ozs7b0JBRTFDLHFCQUFNLE9BQUUsQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLEVBQUE7O3lCQUF4QixDQUFDLENBQUMsU0FBc0IsQ0FBQyxFQUF6Qix3QkFBeUI7b0JBQzNCLHFCQUFNLE9BQUUsQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLEVBQUE7O29CQUFwQixTQUFvQixDQUFDOzs7OztvQkFJdkIsT0FBTyxDQUFDLEtBQUssQ0FBQyxTQUFPLENBQUMsQ0FBQzs7Ozs7O0NBRTFCO0FBVEQsNEJBU0MifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZW5zdXJlLWRpci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uL3NyYy9lbnN1cmUtZGlyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSx5QkFBc0I7QUFFdEIsbUJBQXdDLElBQVk7Ozs7Ozs7b0JBRTFDLHFCQUFNLE9BQUUsQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLEVBQUE7O3lCQUF4QixDQUFDLENBQUMsU0FBc0IsQ0FBQyxFQUF6Qix3QkFBeUI7b0JBQzNCLHFCQUFNLE9BQUUsQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLEVBQUE7O29CQUFwQixTQUFvQixDQUFDOzs7OztvQkFHdkIsTUFBTSxHQUFDLENBQUM7Ozs7O0NBRVg7QUFSRCw0QkFRQyJ9

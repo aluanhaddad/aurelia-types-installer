@@ -25,10 +25,32 @@ export default async function install({projectDir, framework, dest, explicitInde
     .filter(item => item.indexOf(`${framework}-`) > -1)
     .map(x => x.split(`${framework}-`)[1]);
 
-  await ensureDir(baseUrl + '/' + dest);
-  await Promise.all(paths.map(async path => {
-    await downloadDeclaration(baseUrl, dest, path, framework);
-  }));
+  const {successes, failures} = (await Promise.all(paths.map(async path => {
+    try {
+      await ensureDir(baseUrl + '/' + dest);
+      try {
+        const result = await downloadDeclaration(baseUrl, dest, path, framework);
+        return {message: result, error: undefined};
+      } catch (e) {
+        return {message: `failed to install types for '${path}:' could not locate repository.`, error: e.message};
+      }
+    } catch (x) {
+      return {message: `failed to install types for '${dest}: destination directory, '${dest}', could not be read.'`, error: x.message};
+    }
+  }))).reduce(({successes, failures}, result) => {
+    if (result.error) {
+      return {
+        successes,
+        failures: [...failures, result]
+      };
+    }
+    return {
+      successes: [...successes, result.message],
+      failures
+    };
+  }, {
+      successes: [] as string[], failures: [] as {message: string, error: string}[]
+    });
 
   let generatedTsConfigPath = baseUrl + path.sep + 'tsconfig.paths.json';
   const tsConfig: TSConfig = require(await fs.realpath(baseUrl + path.sep + 'tsconfig.json'));
@@ -58,8 +80,20 @@ export default async function install({projectDir, framework, dest, explicitInde
     generatedTsConfig.compilerOptions.moduleResolution = 'node';
   }
   await fs.writeFile(baseUrl + path.sep + 'tsconfig.paths.json', JSON.stringify(generatedTsConfig, (_, value) => value, 2));
-}
+  return {
+    summary: buildSummary(),
+    successes,
+    failures
+  };
 
+  function buildSummary() {
+    const overview = `installed ${successes.length} ${framework} typings\n\nsummary\ninstalled typings for ${successes.length} aurelia-packages:\n:${successes.map(success => ' - ' + success).join(`\n`)}`;
+    const errors = failures.length
+      ? `\nunable to locate typings for ${failures.length} ${framework} packages: \n${failures.map(({message}) => ` - ${message}`).join(`\n`)}`
+      : '';
+    return overview + '\n' + errors;
+  }
+}
 type TSConfig = {
   compilerOptions: {
     moduleResolution?: 'node' | 'classic'

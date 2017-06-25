@@ -45,17 +45,27 @@ function install(_a) {
     var projectDir = _a.projectDir, framework = _a.framework, dest = _a.dest, explicitIndex = _a.explicitIndex;
     return __awaiter(this, void 0, void 0, function () {
         var _this = this;
-        var baseUrl, jspmConfigFileName, _a, _b, paths, _c, generatedTsConfigPath, tsConfig, _d, generatedTsConfig, compilerOptions;
-        return __generator(this, function (_e) {
-            switch (_e.label) {
+        function buildSummary() {
+            var overview = "installed " + successes.length + " " + framework + " typings\n\nsummary\ninstalled typings for " + successes.length + " aurelia-packages:\n:" + successes.map(function (success) { return ' - ' + success; }).join("\n");
+            var errors = failures.length
+                ? "\nunable to locate typings for " + failures.length + " " + framework + " packages: \n" + failures.map(function (_a) {
+                    var message = _a.message;
+                    return " - " + message;
+                }).join("\n")
+                : '';
+            return overview + '\n' + errors;
+        }
+        var baseUrl, jspmConfigFileName, _a, _b, paths, _c, _d, successes, failures, generatedTsConfigPath, tsConfig, _e, generatedTsConfig, compilerOptions;
+        return __generator(this, function (_f) {
+            switch (_f.label) {
                 case 0: return [4 /*yield*/, mz_1.fs.realpath(projectDir)];
                 case 1:
-                    baseUrl = _e.sent();
+                    baseUrl = _f.sent();
                     _b = (_a = mz_1.fs).exists;
                     return [4 /*yield*/, mz_1.fs.realpath(baseUrl + '/jspm.config.js')];
-                case 2: return [4 /*yield*/, _b.apply(_a, [_e.sent()])];
+                case 2: return [4 /*yield*/, _b.apply(_a, [_f.sent()])];
                 case 3:
-                    if (_e.sent()) {
+                    if (_f.sent()) {
                         jspmConfigFileName = baseUrl + path.sep + 'jspm.config.js';
                     }
                     else {
@@ -64,32 +74,60 @@ function install(_a) {
                     _c = extract_jspm_config_1.default;
                     return [4 /*yield*/, mz_1.fs.realpath(jspmConfigFileName)];
                 case 4:
-                    paths = _c.apply(void 0, [_e.sent(), function (name) { return name.split('@').length > 1 && !name.match(/aurelia-types-installer/); }])
+                    paths = _c.apply(void 0, [_f.sent(), function (name) { return name.split('@').length > 1 && !name.match(/aurelia-types-installer/); }])
                         .filter(function (item) { return item.indexOf(framework + "-") > -1; })
                         .map(function (x) { return x.split(framework + "-")[1]; });
-                    return [4 /*yield*/, ensure_dir_1.default(baseUrl + '/' + dest)];
-                case 5:
-                    _e.sent();
                     return [4 /*yield*/, Promise.all(paths.map(function (path) { return __awaiter(_this, void 0, void 0, function () {
+                            var result, e_1, x_1;
                             return __generator(this, function (_a) {
                                 switch (_a.label) {
-                                    case 0: return [4 /*yield*/, aquire_declaration_1.default(baseUrl, dest, path, framework)];
+                                    case 0:
+                                        _a.trys.push([0, 6, , 7]);
+                                        return [4 /*yield*/, ensure_dir_1.default(baseUrl + '/' + dest)];
                                     case 1:
                                         _a.sent();
-                                        return [2 /*return*/];
+                                        _a.label = 2;
+                                    case 2:
+                                        _a.trys.push([2, 4, , 5]);
+                                        return [4 /*yield*/, aquire_declaration_1.default(baseUrl, dest, path, framework)];
+                                    case 3:
+                                        result = _a.sent();
+                                        return [2 /*return*/, { message: result, error: undefined }];
+                                    case 4:
+                                        e_1 = _a.sent();
+                                        return [2 /*return*/, { message: "failed to install types for '" + path + ":' could not locate repository.", error: e_1.message }];
+                                    case 5: return [3 /*break*/, 7];
+                                    case 6:
+                                        x_1 = _a.sent();
+                                        return [2 /*return*/, { message: "failed to install types for '" + dest + ": destination directory, '" + dest + "', could not be read.'", error: x_1.message }];
+                                    case 7: return [2 /*return*/];
                                 }
                             });
                         }); }))];
-                case 6:
-                    _e.sent();
+                case 5:
+                    _d = (_f.sent()).reduce(function (_a, result) {
+                        var successes = _a.successes, failures = _a.failures;
+                        if (result.error) {
+                            return {
+                                successes: successes,
+                                failures: failures.concat([result])
+                            };
+                        }
+                        return {
+                            successes: successes.concat([result.message]),
+                            failures: failures
+                        };
+                    }, {
+                        successes: [], failures: []
+                    }), successes = _d.successes, failures = _d.failures;
                     generatedTsConfigPath = baseUrl + path.sep + 'tsconfig.paths.json';
-                    _d = require;
+                    _e = require;
                     return [4 /*yield*/, mz_1.fs.realpath(baseUrl + path.sep + 'tsconfig.json')];
-                case 7:
-                    tsConfig = _d.apply(void 0, [_e.sent()]);
+                case 6:
+                    tsConfig = _e.apply(void 0, [_f.sent()]);
                     return [4 /*yield*/, mz_1.fs.exists(generatedTsConfigPath)];
-                case 8:
-                    if (_e.sent()) {
+                case 7:
+                    if (_f.sent()) {
                         generatedTsConfig = require(generatedTsConfigPath);
                     }
                     else {
@@ -114,12 +152,16 @@ function install(_a) {
                         generatedTsConfig.compilerOptions.moduleResolution = 'node';
                     }
                     return [4 /*yield*/, mz_1.fs.writeFile(baseUrl + path.sep + 'tsconfig.paths.json', JSON.stringify(generatedTsConfig, function (_, value) { return value; }, 2))];
-                case 9:
-                    _e.sent();
-                    return [2 /*return*/];
+                case 8:
+                    _f.sent();
+                    return [2 /*return*/, {
+                            summary: buildSummary(),
+                            successes: successes,
+                            failures: failures
+                        }];
             }
         });
     });
 }
 exports.default = install;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5zdGFsbC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uL3NyYy9pbnN0YWxsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSwrQkFBNkI7QUFDN0IsMkNBQXFDO0FBQ3JDLDJEQUF1RDtBQUN2RCx5QkFBc0I7QUFDdEIsMkJBQThCO0FBQzlCLDZEQUFzRDtBQVN0RCxpQkFBc0MsRUFBNEQ7UUFBM0QsMEJBQVUsRUFBRSx3QkFBUyxFQUFFLGNBQUksRUFBRSxnQ0FBYTs7O3FCQUczRSxrQkFBa0IscUJBZWxCLHFCQUFxQixnQkFFckIsaUJBQWlCLEVBaUJkLGVBQWU7Ozt3QkFwQ04scUJBQU0sT0FBRSxDQUFDLFFBQVEsQ0FBQyxVQUFVLENBQUMsRUFBQTs7OEJBQTdCLFNBQTZCO29CQUduQyxLQUFBLENBQUEsS0FBQSxPQUFFLENBQUEsQ0FBQyxNQUFNLENBQUE7b0JBQUMscUJBQU0sT0FBRSxDQUFDLFFBQVEsQ0FBQyxPQUFPLEdBQUcsaUJBQWlCLENBQUMsRUFBQTt3QkFBOUQscUJBQU0sY0FBVSxTQUE4QyxFQUFDLEVBQUE7O29CQUFuRSxFQUFFLENBQUMsQ0FBQyxTQUErRCxDQUFDLENBQUMsQ0FBQzt3QkFDcEUsa0JBQWtCLEdBQUcsT0FBTyxHQUFHLElBQUksQ0FBQyxHQUFHLEdBQUcsZ0JBQWdCLENBQUM7b0JBQzdELENBQUM7b0JBQUMsSUFBSSxDQUFDLENBQUM7d0JBQ04sa0JBQWtCLEdBQUcsT0FBTyxHQUFHLElBQUksQ0FBQyxHQUFHLEdBQUcsV0FBVyxDQUFDO29CQUN4RCxDQUFDO29CQUNhLEtBQUEsNkJBQWlCLENBQUE7b0JBQUMscUJBQU0sT0FBRSxDQUFDLFFBQVEsQ0FBQyxrQkFBa0IsQ0FBQyxFQUFBOzs0QkFBdkQsa0JBQWtCLFNBQXFDLEVBQUUsVUFBQSxJQUFJLElBQUksT0FBQSxJQUFJLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxDQUFD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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5zdGFsbC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uL3NyYy9pbnN0YWxsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSwrQkFBNkI7QUFDN0IsMkNBQXFDO0FBQ3JDLDJEQUF1RDtBQUN2RCx5QkFBc0I7QUFDdEIsMkJBQThCO0FBQzlCLDZEQUFzRDtBQVN0RCxpQkFBc0MsRUFBNEQ7UUFBM0QsMEJBQVUsRUFBRSx3QkFBUyxFQUFFLGNBQUksRUFBRSxnQ0FBYTs7O1FBMEUvRTtZQUNFLElBQU0sUUFBUSxHQUFHLGVBQWEsU0FBUyxDQUFDLE1BQU0sU0FBSSxTQUFTLG1EQUE4QyxTQUFTLENBQUMsTUFBTSw2QkFBd0IsU0FBUyxDQUFDLEdBQUcsQ0FBQyxVQUFBLE9BQU8sSUFBSSxPQUFBLEtBQUssR0FBRyxPQUFPLEVBQWYsQ0FBZSxDQUFDLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBRyxDQUFDO1lBQ3hNLElBQU0sTUFBTSxHQUFHLFFBQVEsQ0FBQyxNQUFNO2tCQUMxQixvQ0FBa0MsUUFBUSxDQUFDLE1BQU0sU0FBSSxTQUFTLHFCQUFnQixRQUFRLENBQUMsR0FBRyxDQUFDLFVBQUMsRUFBUzt3QkFBUixvQkFBTztvQkFBTSxPQUFBLFFBQU0sT0FBUztnQkFBZixDQUFlLENBQUMsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFHO2tCQUN2SSxFQUFFLENBQUM7WUFDUCxNQUFNLENBQUMsUUFBUSxHQUFHLElBQUksR0FBRyxNQUFNLENBQUM7UUFDbEMsQ0FBQzs7Ozt3QkEvRWUscUJBQU0sT0FBRSxDQUFDLFFBQVEsQ0FBQyxVQUFVLENBQUMsRUFBQTs7b0JBQXZDLE9BQU8sR0FBRyxTQUE2QjtvQkFHbkMsS0FBQSxDQUFBLEtBQUEsT0FBRSxDQUFBLENBQUMsTUFBTSxDQUFBO29CQUFDLHFCQUFNLE9BQUUsQ0FBQyxRQUFRLENBQUMsT0FBTyxHQUFHLGlCQUFpQixD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

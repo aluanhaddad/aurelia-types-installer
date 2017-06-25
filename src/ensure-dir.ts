@@ -1,12 +1,11 @@
-﻿import { fs } from 'mz';
+﻿import {fs} from 'mz';
 
 export default async function ensureDir(path: string) {
   try {
     if (!(await fs.readdir(path))) {
       await fs.mkdir(path);
-
     }
-  } catch (message) {
-    console.error(message);
+  } catch (e) {
+    throw e;
   }
 }
