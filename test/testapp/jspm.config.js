@@ -271,6 +271,7 @@ SystemJS.config({
         "npm:*.json"
     ],
     map: {
+        "aurelia-dialog": "npm:aurelia-dialog@1.0.0-rc.1.0.3",
         "aurelia-bootstrap": "github:tochoromero/aurelia-bootstrap@0.1.19",
         "babel-plugin-transform-async-to-module-method": "npm:babel-plugin-transform-async-to-module-method@6.8.0",
         "babel-plugin-transform-decorators-legacy": "npm:babel-plugin-transform-decorators-legacy@1.3.4",
@@ -309,7 +310,7 @@ SystemJS.config({
         "fs": "npm:jspm-nodelibs-fs@0.2.0",
         "os": "npm:jspm-nodelibs-os@0.2.0",
         "path": "npm:jspm-nodelibs-path@0.2.0",
-        "process": "npm:jspm-nodelibs-process@0.2.0",
+        "process": "github:jspm/nodelibs-process@0.2.0-alpha",
         "stream": "npm:jspm-nodelibs-stream@0.2.0",
         "string_decoder": "npm:jspm-nodelibs-string_decoder@0.2.0",
         "util": "npm:jspm-nodelibs-util@0.2.0",
