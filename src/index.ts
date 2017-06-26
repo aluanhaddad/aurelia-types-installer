@@ -26,6 +26,8 @@ const {command, framework, version, help, ...args} = parseArgs();
       } else if (help) {
         info(usage);
         process.exit(0);
+      } else {
+        info(usage);
       }
   }
 
