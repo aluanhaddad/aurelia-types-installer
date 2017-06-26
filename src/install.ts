@@ -32,10 +32,10 @@ export default async function install({projectDir, framework, dest, explicitInde
         const result = await downloadDeclaration(baseUrl, dest, path, framework);
         return {message: result, error: undefined};
       } catch (e) {
-        return {message: `failed to install types for '${framework}-${path}:' could not locate repository.`, error: e.message};
+        return {message: `failed to install declarations for '${framework}-${path}:' could not locate declaration in repository or repository.`, error: e.message};
       }
     } catch (x) {
-      return {message: `failed to install types for '${framework}-${path}: destination directory, '${dest}', could not be read.'`, error: x.message};
+      return {message: `failed to install declarations for '${framework}-${path}: destination directory, '${dest}', could not be read.'`, error: x.message};
     }
   }))).reduce(({successes, failures}, result) => {
     if (result.error) {
@@ -87,11 +87,11 @@ export default async function install({projectDir, framework, dest, explicitInde
   };
 
   function buildSummary() {
-    const overview = `installed ${successes.length} ${framework} typings\n\nsummary\ninstalled typings for ${successes.length} aurelia-packages:\n\n${successes.map(success => ' - ' + success).join(`\n`)}`;
+    const overview = `Installed ${successes.length} ${framework} type declarations.\n\n${successes.map(success => ' - ' + success).join(`\n`)}.`;
     const errors = failures.length
-      ? `\nunable to locate typings for ${failures.length} ${framework} packages:\n\n${failures.map(({message}) => ` - ${message}`).join(`\n`)}`
+      ? `\nUnable to locate type declarations for ${failures.length} ${framework} packages:\n\n${failures.map(({message}) => ` - ${message}`).join(`\n`)}.`
       : '';
-    return overview + '\n' + errors;
+    return [overview, errors].join('\n');
   }
 }
 type TSConfig = {

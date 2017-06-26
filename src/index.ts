@@ -10,10 +10,11 @@ const {command, framework, version, help, ...args} = parseArgs();
   switch (command) {
     case 'install':
     case 'i':
-      info(`installing ${framework} typings...`);
+      info(`Installing ${framework} type declarations...`);
       try {
         const results = await install({framework, ...args});
-        info('\n', results.summary);
+        info('\n');
+        info(results.summary);
       } catch (e) {
         console.error.bind(e);
       }
