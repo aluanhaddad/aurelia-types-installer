@@ -1,6 +1,6 @@
 {
   "name": "aurelia-types-installer",
-  "version": "0.2.11",
+  "version": "0.2.12",
   "bin": {
     "ati": "./bin/ati"
   },
