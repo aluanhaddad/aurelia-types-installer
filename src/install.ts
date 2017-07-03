@@ -74,7 +74,9 @@ export default async function install({projectDir, framework, dest, explicitInde
   const {compilerOptions} = generatedTsConfig;
 
   paths.forEach(name => {
-    compilerOptions.paths[`${framework}-${name.split('@')[0]}`] = [`${dest}/${framework}-${name}${explicitIndex ? '/index' : ''}`];
+    const existingEntries = compilerOptions.paths[`${framework}-${name.split('@')[0]}`];
+    const newEntry = `${dest}/${framework}-${name}${explicitIndex ? '/index' : ''}`;
+    compilerOptions.paths[`${framework}-${name.split('@')[0]}`] = existingEntries ? [...existingEntries.filter(entry => entry !== newEntry), newEntry] : [newEntry];
   });
   if (!explicitIndex && !tsConfig.compilerOptions.moduleResolution && !generatedTsConfig.compilerOptions.moduleResolution) {
     generatedTsConfig.compilerOptions.moduleResolution = 'node';
