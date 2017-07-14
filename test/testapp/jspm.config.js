@@ -203,31 +203,27 @@ SystemJS.config({
     },
     devConfig: {
         "map": {
-            "plugin-typescript": "github:frankwallis/plugin-typescript@5.1.1",
+            "plugin-typescript": "github:frankwallis/plugin-typescript@7.0.6",
             "readline": "npm:jspm-nodelibs-readline@0.2.0",
             "babel-plugin-transform-es2015-typeof-symbol": "npm:babel-plugin-transform-es2015-typeof-symbol@6.8.0",
             "net": "npm:jspm-nodelibs-net@0.2.0",
-            "module": "npm:jspm-nodelibs-module@0.2.0"
+            "module": "npm:jspm-nodelibs-module@0.2.0",
+            "typescript": "npm:typescript@2.4.1"
         },
         "packages": {
-            "github:frankwallis/plugin-typescript@5.1.1": {
-                "map": {
-                    "typescript": "npm:typescript@next"
-                }
-            },
             "npm:babel-plugin-transform-es2015-typeof-symbol@6.8.0": {
                 "map": {
                     "babel-runtime": "npm:babel-runtime@6.11.6"
                 }
             },
-            "npm:typescript@next": {
-                "map": {
-                    "source-map-support": "npm:source-map-support@0.4.15"
-                }
-            },
             "npm:source-map-support@0.4.15": {
                 "map": {
                     "source-map": "npm:source-map@0.5.6"
+                }
+            },
+            "npm:typescript@2.4.1": {
+                "map": {
+                    "source-map-support": "npm:source-map-support@0.4.15"
                 }
             }
         }
