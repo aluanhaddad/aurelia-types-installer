@@ -52,7 +52,7 @@ export default async function install({projectDir, framework, dest, explicitInde
       successes: [] as string[], failures: [] as {message: string, error: string}[]
     });
 
-  let generatedTsConfigPath = baseUrl + path.sep + 'tsconfig.paths.json';
+  const generatedTsConfigPath = baseUrl + path.sep + 'tsconfig.paths.json';
   const tsConfig: TSConfig = require(await fs.realpath(baseUrl + path.sep + 'tsconfig.json'));
   let generatedTsConfig: TSConfig;
   if (await fs.exists(generatedTsConfigPath)) {

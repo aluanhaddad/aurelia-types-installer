@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "noEmit": true
+  },
+  "exclude": [
+    "node_modules",
+    "jspm_packages",
+    "test/testapp"
+  ]
+}

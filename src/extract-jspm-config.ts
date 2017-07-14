@@ -1,5 +1,3 @@
-import './polyfills/imbue-array';
-
 export default function extractJspmConfig(jspmConfigPath: string, predicate: (packageName: string) => boolean) {
   const jspmConfig = {} as {[key: string]: {}};
   const SystemJSRestore = global.global.SystemJS;

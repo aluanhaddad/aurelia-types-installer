@@ -1,3 +1,2 @@
-import addObjectPolyfills, { imbueArray } from './index';
+import addObjectPolyfills from './index';
 addObjectPolyfills();
-imbueArray();

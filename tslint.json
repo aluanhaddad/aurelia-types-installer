@@ -39,6 +39,7 @@
     "no-consecutive-blank-lines": [
       true
     ],
+    "prefer-const": true,
     "no-bitwise": true,
     "no-conditional-assignment": true,
     "no-construct": true,
@@ -97,7 +98,9 @@
       "check-operator",
       "check-separator",
       "check-type",
-      "check-typecast"
+      "check-typecast",
+      false,
+      "check-module"
     ],
     "no-inferrable-types": [
       true
