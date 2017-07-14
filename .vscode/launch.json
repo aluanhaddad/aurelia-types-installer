@@ -1,0 +1,31 @@
+{
+  // Use IntelliSense to find out which attributes exist for node debugging
+  // Use hover for the description of the existing attributes
+  // For further information visit https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "name": "Launch Program",
+      "request": "launch",
+      "program": "${workspaceRoot}\\dist\\index.js",
+      "cwd": "${workspaceRoot}",
+      "restart": true,
+      "outFiles": [],
+      "protocol": "inspector",
+      "sourceMaps": true,
+      "preLaunchTask": "tsc",
+      "args": [
+        // "--version",
+        // "-v"
+        "i",
+        "--explicitIndex",
+        "false"
+        // "--projectDir",
+        // "./test/testapp",
+        // "--dest",
+        // "jspm_packages/npm"
+      ]
+    }
+  ]
+}
