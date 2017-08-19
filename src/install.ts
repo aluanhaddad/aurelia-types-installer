@@ -1,8 +1,9 @@
 ﻿import './polyfills/enhance';
-import ensureDir from './ensure-dir';
-import downloadDeclaration from './aquire-declaration';
 import {fs} from 'mz';
 import path = require('path');
+import deepEqual = require('deep-equal');
+import ensureDir from './ensure-dir';
+import downloadDeclaration from './aquire-declaration';
 import extractJspmConfig from './extract-jspm-config';
 
 export interface InstallOptions {
@@ -81,7 +82,10 @@ export default async function install({projectDir, framework, dest, explicitInde
   if (!explicitIndex && !tsConfig.compilerOptions.moduleResolution && !generatedTsConfig.compilerOptions.moduleResolution) {
     generatedTsConfig.compilerOptions.moduleResolution = 'node';
   }
-  await fs.writeFile(baseUrl + path.sep + 'tsconfig.paths.json', JSON.stringify(generatedTsConfig, (_, value) => value, 2));
+
+  if (!deepEqual(generatedTsConfig, tsConfig, {strict: true})) {
+    await fs.writeFile(baseUrl + path.sep + 'tsconfig.paths.json', JSON.stringify(generatedTsConfig, (_, value) => value, 2));
+  }
   return {
     summary: buildSummary(),
     successes,
@@ -96,12 +100,12 @@ export default async function install({projectDir, framework, dest, explicitInde
     return [overview, errors].join('\n');
   }
 }
-type TSConfig = {
+interface TSConfig {
   compilerOptions: {
     moduleResolution?: 'node' | 'classic'
     baseUrl?: string
     paths: {
       [key: string]: string[]
     }
-  }
-};
+  };
+}

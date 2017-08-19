@@ -18,7 +18,7 @@ export default async function retrieveFromGitHub(baseUrl: string, destinationDir
 async function save({baseUrl, destinationDir, versionedName, prefix}: {destinationDir: string, baseUrl: string, versionedName: string, prefix: string}, declaration: string) {
   const {name, version} = nameAndVesion(versionedName);
   const targetFile = `${baseUrl}/${destinationDir}/${prefix}-${name}@${version}/index.d.ts`;
-  const file = fs.createWriteStream(targetFile, {encoding: 'UTF8'});
+  const file = fs.createWriteStream(targetFile, 'UTF8');
   await file.write(declaration);
 }
 
