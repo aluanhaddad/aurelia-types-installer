@@ -98,9 +98,7 @@
       "check-operator",
       "check-separator",
       "check-type",
-      "check-typecast",
-      false,
-      "check-module"
+      "check-typecast"
     ],
     "no-inferrable-types": [
       true
