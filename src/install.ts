@@ -33,10 +33,13 @@ export default async function install({projectDir, framework, dest, explicitInde
         const result = await downloadDeclaration(baseUrl, dest, path, framework);
         return {message: result, error: undefined};
       } catch (e) {
-        return {message: `failed to install declarations for '${framework}-${path}:' could not locate declaration in repository or repository.`, error: e.message};
+        return {
+          message: `failed to install declarations for '${framework}-${path}' (could not locate declaration in repository or repository)
+        ${failureWorkaroundHint(path)}`, error: e.message
+        };
       }
     } catch (x) {
-      return {message: `failed to install declarations for '${framework}-${path}: destination directory, '${dest}', could not be read.'`, error: x.message};
+      return {message: `failed to install declarations for '${framework}-${path} (destination directory, '${dest}', could not be read)'`, error: x.message};
     }
   }))).reduce(({successes, failures}, result) => {
     if (result.error) {
@@ -86,18 +89,38 @@ export default async function install({projectDir, framework, dest, explicitInde
   if (!deepEqual(generatedTsConfig, tsConfig, {strict: true})) {
     await fs.writeFile(baseUrl + path.sep + 'tsconfig.paths.json', JSON.stringify(generatedTsConfig, (_, value) => value, 2));
   }
-  return {
-    summary: buildSummary(),
-    successes,
-    failures
-  };
+  const {successSummary, failureSummary} = buildSummary();
+  return {successSummary, failureSummary};
 
   function buildSummary() {
-    const overview = `Installed ${successes.length} ${framework} type declarations.\n\n${successes.map(success => ' - ' + success).join(`\n`)}.`;
-    const errors = failures.length
-      ? `\nUnable to locate type declarations for ${failures.length} ${framework} packages:\n\n${failures.map(({message}) => ` - ${message}`).join(`\n`)}.`
-      : '';
-    return [overview, errors].join('\n');
+    return {
+      successSummary: `Installed ${successes.length} ${framework} type declarations:
+
+${successes.map(success => ' - ' + success).join(`\n`)}.`,
+
+      failureSummary: failures.length && `
+Unable to locate type declarations for ${failures.length} ${framework} packages:
+
+${failures.map(({message}) => ` - ${message}`).join(`\n`)}
+` || ''
+    };
+  }
+
+  function failureWorkaroundHint(dep: string) {
+    const name = `${framework}-${dep.split('@')[0] || dep}`;
+    return `
+  consider:
+    - adding
+        "${name}": ["jspm_packages/npm/${name}"]
+      to the "paths" object of the "compilerOptions" object of your tsconfig.paths.json
+    - running
+        $ jspm install npm:@types/${name}
+    - running
+        $ npm install --save @types/${name}
+    - adding
+        declare module "${name}";
+      to a global .d.ts file
+    `;
   }
 }
 interface TSConfig {
