@@ -16,7 +16,8 @@ export interface InstallOptions {
 
 export default async function install({projectDir, framework, dest, explicitIndex}: InstallOptions) {
   const baseUrl = await fs.realpath(projectDir);
-
+  let successSummary = '';
+  let failureSummary = '';
   for await (const paths of loadJspmConfiguration({baseUrl, framework})) {
 
     const {successes, failures} = (await Promise.all(paths.map(async path => {
@@ -82,23 +83,21 @@ export default async function install({projectDir, framework, dest, explicitInde
     if (!deepEqual(generatedTsConfig, tsConfig, {strict: true})) {
       await fs.writeFile(baseUrl + path.sep + 'tsconfig.paths.json', JSON.stringify(generatedTsConfig, (_, value) => value, 2));
     }
-    const {successSummary, failureSummary} = buildSummary(successes, failures);
-    return {successSummary, failureSummary};
-
+    appendSummary(successes, failures);
   }
+  return {successSummary, failureSummary};
+  function appendSummary(successes: string[], failures: {message: string}[]) {
 
-  function buildSummary(successes: string[], failures: {message: string}[]) {
-    return {
-      successSummary: `Installed ${successes.length} ${framework} type declarations:
+    successSummary = successSummary + '\n' + `Installed ${successes.length} ${framework} type declarations:
 
-${successes.map(success => ' - ' + success).join(`\n`)}.`,
+${successes.map(success => ' - ' + success).join('\n')}.`,
 
-      failureSummary: failures.length && `
+      failureSummary = failureSummary + '\n' + failures.length && `
 Unable to locate type declarations for ${failures.length} ${framework} packages:
 
-${failures.map(({message}) => ` - ${message}`).join(`\n`)}
-` || ''
-    };
+${failures.map(({message}) => ` - ${message}`).join('\n')}
+` || '';
+
   }
 
   function failureWorkaroundHint(dep: string) {
