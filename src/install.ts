@@ -19,7 +19,7 @@ export default async function install({projectDir, framework, dest, explicitInde
   let successSummary = '';
   let failureSummary = '';
   for await (const {paths, configFile} of loadJspmConfiguration({baseUrl, framework})) {
-    successSummary += `Using config source: ${configFile}:\n`;
+    successSummary += `\nUsing config source: ${configFile}:\n`;
     const {successes, failures} = (await Promise.all(paths.map(async path => {
       try {
         await ensureDir(baseUrl + '/' + dest);
