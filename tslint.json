@@ -2,15 +2,38 @@
   "defaultSeverity": "warning",
   "rules": {
     "ban": [
-      [
-        "eval",
-        "setTimeout"
-      ]
+      true,
+      "eval",
+      "setTimeout",
+      "Function"
     ],
+    "arrow-parens": [
+      true,
+      "ban-single-arg-parens"
+    ],
+    "no-empty-interface": true,
+    "no-reference-import": true,
+    "ordered-imports": [
+      true,
+      {
+        "grouped-imports": true,
+        "module-source-path": "full",
+        "import-sources-order": "lowercase-last",
+        "named-imports-order": "lowercase-first"
+      }
+    ],
+    "await-promise": [
+      true,
+      "RequestPromise"
+    ],
+    "no-null-keyword": true,
+    "use-isnan": true,
+    "no-floating-promises": true,
+    "use-default-type-parameter": true,
+    "arrow-return-shorthand": true,
+    "callable-types": true,
     "class-name": true,
-    "align": [
-      true
-    ],
+    "align": true,
     "no-any": true,
     "new-parens": true,
     "prefer-for-of": true,
@@ -25,6 +48,7 @@
     "no-internal-module": true,
     "indent": [
       true,
+      "spaces",
       2
     ],
     "interface-name": [
@@ -54,10 +78,11 @@
       true,
       20
     ],
+    "import-spacing": true,
     "object-literal-shorthand": true,
     "object-literal-key-quotes": [
       true,
-      "as-needed"
+      "consistent-as-needed"
     ],
     "no-trailing-whitespace": true,
     "no-unused-expression": true,
@@ -78,21 +103,17 @@
       "avoid-escape"
     ],
     "radix": true,
-    "semicolon": [
-      true,
-      "always"
-    ],
+    "semicolon": true,
     "switch-default": false,
     "triple-equals": true,
-    "typedef-whitespace": [
-      true
-    ],
+    "typedef-whitespace": true,
     "variable-name": [
       true,
       "allow-pascal-case"
     ],
     "whitespace": [
       true,
+      "check-import",
       "check-branch",
       "check-decl",
       "check-operator",
@@ -100,8 +121,6 @@
       "check-type",
       "check-typecast"
     ],
-    "no-inferrable-types": [
-      true
-    ]
+    "no-inferrable-types": true
   }
 }
