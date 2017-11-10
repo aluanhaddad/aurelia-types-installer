@@ -12,12 +12,15 @@
     "moduleResolution": "node",
     "downlevelIteration": true,
     "noFallthroughCasesInSwitch": true,
-    "experimentalDecorators": true,
     "outDir": "dist",
     "rootDir": "src",
     "listEmittedFiles": true,
     "declaration": true,
-    "types": []
+    "types": [],
+    "pretty": true,
+    "noEmitHelpers": true,
+    "importHelpers": true,
+    "forceConsistentCasingInFileNames": true
   },
   "exclude": [
     "node_modules",
