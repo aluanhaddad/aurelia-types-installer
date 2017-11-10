@@ -1,4 +1,4 @@
-import chalk = require('chalk');
+import chalk from 'chalk';
 import install from './install';
 import parseArgs from './parse-args';
 import {version as atiVersion} from '../package.json';
@@ -8,9 +8,9 @@ const usage = 'Usage: ati install [--projectDir = .] [--framework = aurelia] [--
 const {command, framework, version, help, ...args} = parseArgs();
 
 (async function () {
-  const log = (...x: {}[]) => console.log(chalk.blue(...x));
-  const info = (...x: {}[]) => console.info(chalk.green(...x));
-  const warn = (...x: {}[]) => console.warn(chalk.yellow(...x));
+  const log = (...x: string[]) => console.log(chalk.blue(...x));
+  const info = (...x: string[]) => console.info(chalk.green(...x));
+  const warn = (...x: string[]) => console.warn(chalk.yellow(...x));
   switch (command) {
     case 'install':
     case 'i':
