@@ -15,7 +15,9 @@
     "experimentalDecorators": true,
     "outDir": "dist",
     "rootDir": "src",
-    "listEmittedFiles": true
+    "listEmittedFiles": true,
+    "declaration": true,
+    "types": []
   },
   "exclude": [
     "node_modules",

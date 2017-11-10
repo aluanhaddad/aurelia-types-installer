@@ -14,6 +14,7 @@
     "lint": "tslint --project tsconfig.json --config tslint.json --format stylish"
   },
   "main": "dist/index",
+  "typings": "dist/index",
   "author": "aluanh@gmail.com",
   "homepage": "https://github.com/aluanhaddad/aurelia-types-installer",
   "bugs": {
