@@ -36,39 +36,29 @@ export default async function install({projectDir, framework, dest, explicitInde
       } catch (x) {
         return {message: `failed to install declarations for '${framework}-${path} (destination directory, '${dest}', could not be read)'`, error: x.message};
       }
-    }))).reduce(({successes, failures}, result) => {
-      if (result.error) {
-        return {
-          successes,
-          failures: [...failures, result]
-        };
-      }
-      return {
-        successes: [...successes, result.message],
-        failures
-      };
-    }, {
-        successes: [] as string[], failures: [] as {message: string, error: string}[]
-      });
+    }))).reduce(({successes, failures}, result) =>
+      result.error
+        ? {successes, failures: [...failures, result]}
+        : {successes: [...successes, result.message], failures},
+      {successes: [] as string[], failures: [] as {message: string, error: string}[]});
 
     const generatedTsConfigPath = baseUrl + path.sep + 'tsconfig.paths.json';
     const tsConfig: TSConfig = require(await fs.realpath(baseUrl + path.sep + 'tsconfig.json'));
-    let generatedTsConfig: TSConfig;
-    if (await fs.exists(generatedTsConfigPath)) {
-      generatedTsConfig = require(generatedTsConfigPath) as TSConfig;
-    } else {
-      generatedTsConfig = {
+    const generatedTsConfig: TSConfig = await fs.exists(generatedTsConfigPath)
+      ? require(generatedTsConfigPath)
+      : {
         compilerOptions: {
           baseUrl: '.',
           paths: {}
         }
       };
-    }
+
     if (!generatedTsConfig.compilerOptions) {
-      generatedTsConfig.compilerOptions = Object.assign(generatedTsConfig.compilerOptions, {
+      generatedTsConfig.compilerOptions = {
+        ...generatedTsConfig.compilerOptions || {},
         paths: tsConfig.compilerOptions.paths || {},
         baseUrl: '.',
-      });
+      };
     }
     const {compilerOptions} = generatedTsConfig;
 

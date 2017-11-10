@@ -9,16 +9,19 @@ import parseArgs from './parse-args';
 
 const {version: atiVersion} = thisPackage;
 
-const usage = 'Usage: ati install [--projectDir = .] [--framework = aurelia] [--dest = projectDir/jspm_packages/npm] [--explicitIndex = true]';
+const usage = 'Usage: ati install [--projectDir = .] [--framework = aurelia] [--dest = projectDir/jspm_packages/npm] [--explicitIndex = false]';
 
 const {command, framework, version, help, ...args} = parseArgs();
 
-(async function (log, info, warn) {
+(async function () {
+  const log = (...x: string[]) => console.log(chalk.blue(...x));
+  const info = (...x: string[]) => console.info(chalk.green(...x));
+  const warn = (...x: string[]) => console.warn(chalk.yellow(...x));
 
-  info(atiVersion);
   switch (command) {
     case 'install':
     case 'i':
+      info(atiVersion);
       log(`Installing ${framework} type declarations...\n`);
       try {
         const {successSummary, failureSummary} = await install({framework, ...args});
@@ -39,7 +42,7 @@ const {command, framework, version, help, ...args} = parseArgs();
         info(usage);
       }
   }
-}(chalk.blue.bind(chalk), chalk.green.bind(chalk), chalk.yellow.bind(chalk)));
+}());
 
 declare global {
   interface Function {

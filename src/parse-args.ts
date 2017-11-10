@@ -9,7 +9,7 @@ export default function parseArgs() {
       projectDir: '.',
       framework: 'aurelia',
       dest: 'jspm_packages/npm',
-      explicitIndex: true
+      explicitIndex: false
     },
     'boolean': ['explicitIndex'],
     '--': true
