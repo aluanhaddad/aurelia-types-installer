@@ -1,6 +1,8 @@
 import mz = require('mz');
-import extractJspmConfig from './extract-jspm-config';
 import path = require('path');
+
+import extractJspmConfig from './extract-jspm-config';
+
 const {fs} = mz;
 
 export default async function* loadJspmConfiguration({baseUrl, framework}: {baseUrl: string, framework: string}) {

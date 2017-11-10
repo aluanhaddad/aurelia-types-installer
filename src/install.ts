@@ -1,11 +1,12 @@
-﻿import './polyfills/enhance';
+﻿import deepEqual = require('deep-equal');
 import mz = require('mz');
-const {fs} = mz;
 import path = require('path');
-import deepEqual = require('deep-equal');
-import ensureDir from './ensure-dir';
+
 import downloadDeclaration from './aquire-declaration';
+import ensureDir from './ensure-dir';
 import loadJspmConfiguration from './load-jspm-configuration';
+
+const {fs} = mz;
 
 export interface InstallOptions {
   projectDir: string;
@@ -76,13 +77,16 @@ export default async function install({projectDir, framework, dest, explicitInde
       const newEntry = `${dest}/${framework}-${name}${explicitIndex ? '/index' : ''}`;
       compilerOptions.paths[`${framework}-${name.split('@')[0]}`] = existingEntries ? [...existingEntries.filter(entry => entry !== newEntry), newEntry] : [newEntry];
     });
+
     if (!explicitIndex && !tsConfig.compilerOptions.moduleResolution && !generatedTsConfig.compilerOptions.moduleResolution) {
       generatedTsConfig.compilerOptions.moduleResolution = 'node';
     }
 
     if (!deepEqual(generatedTsConfig, tsConfig, {strict: true})) {
-      await fs.writeFile(baseUrl + path.sep + 'tsconfig.paths.json', JSON.stringify(generatedTsConfig, (_, value) => value, 2));
+      const serializedTsConfigPathsPath = JSON.stringify(generatedTsConfig, (_, value) => value, 2);
+      await fs.writeFile(`${baseUrl}${path.sep}tsconfig.paths.json`, serializedTsConfigPathsPath);
     }
+
     appendSummary(successes, failures);
   }
   return {successSummary, failureSummary};

@@ -3,10 +3,11 @@ export default function extractJspmConfig(jspmConfigPath: string, predicate: (pa
   const SystemJSRestore = global.global.SystemJS;
   global.global.SystemJS = {
     config: config => {
-      return Object.keys(config).map(key => [key, config[key]] as [string, {}]).reduce((cfg, [key, value]) => {
-        cfg[key] = value;
-        return cfg;
-      }, jspmConfig);
+      return Object.entries(config)
+        .reduce((configuration, [key, value]) => {
+          configuration[key] = value;
+          return configuration;
+        }, jspmConfig);
     }
   };
   // Import config file in the context of a fake SystemJS.
@@ -20,10 +21,16 @@ function unrollWithFilter(o: object, predicate: (packageName: string) => boolean
   if (!o || typeof o === 'number' || typeof o === 'boolean') {
     return [];
   }
-  return Object
-    .values(o)
+  return Object.values(o)
     .flatMap(value => typeof value !== 'string'
       ? unrollWithFilter(value, predicate)
       : [value])
-    .filter(value => typeof value === 'string' && predicate(value) && !value.endsWith('js') && !value.endsWith('json'));
+    .filter(includeConfigValue);
+
+  function includeConfigValue(value: string) {
+    return typeof value === 'string'
+      && predicate(value)
+      && !value.endsWith('js')
+      && !value.endsWith('json');
+  }
 }

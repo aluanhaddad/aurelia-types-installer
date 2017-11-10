@@ -1,16 +1,21 @@
 import chalk from 'chalk';
+
+import thisPackage = require('../package.json');
+
+import './polyfills/enhance';
+
 import install from './install';
 import parseArgs from './parse-args';
-import {version as atiVersion} from '../package.json';
+
+const {version: atiVersion} = thisPackage;
 
 const usage = 'Usage: ati install [--projectDir = .] [--framework = aurelia] [--dest = projectDir/jspm_packages/npm] [--explicitIndex = true]';
 
 const {command, framework, version, help, ...args} = parseArgs();
 
-(async function () {
-  const log = (...x: string[]) => console.log(chalk.blue(...x));
-  const info = (...x: string[]) => console.info(chalk.green(...x));
-  const warn = (...x: string[]) => console.warn(chalk.yellow(...x));
+(async function (log, info, warn) {
+
+  info(atiVersion);
   switch (command) {
     case 'install':
     case 'i':
@@ -34,4 +39,11 @@ const {command, framework, version, help, ...args} = parseArgs();
         info(usage);
       }
   }
-}());
+}(chalk.blue.bind(chalk), chalk.green.bind(chalk), chalk.yellow.bind(chalk)));
+
+declare global {
+  interface Function {
+    // tslint:disable-next-line:no-any
+    bind<T extends this>(this: T, ...args: any[]): typeof this;
+  }
+}
