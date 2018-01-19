@@ -1,5 +1,5 @@
-import mz = require('mz');
-import path = require('path');
+import mz from 'mz';
+import path from 'path';
 
 import extractJspmConfig from './extract-jspm-config';
 

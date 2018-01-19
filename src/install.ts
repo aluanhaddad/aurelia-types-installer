@@ -1,19 +1,13 @@
-﻿import deepEqual = require('deep-equal');
-import mz = require('mz');
-import path = require('path');
+﻿import deepEqual from 'deep-equal';
+import mz from 'mz';
+import path from 'path';
 
 import downloadDeclaration from './aquire-declaration';
 import ensureDir from './ensure-dir';
 import loadJspmConfiguration from './load-jspm-configuration';
+import InstallOptions from './install-options';
 
 const {fs} = mz;
-
-export interface InstallOptions {
-  projectDir: string;
-  framework: string;
-  dest: string;
-  explicitIndex: boolean;
-}
 
 export default async function install({projectDir, framework, dest, explicitIndex}: InstallOptions) {
   const baseUrl = await fs.realpath(projectDir);

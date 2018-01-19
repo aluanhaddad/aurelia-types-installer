@@ -1,6 +1,6 @@
-import minimist = require('minimist');
+import minimist from 'minimist';
 
-import {InstallOptions} from './install';
+import InstallOptions from './install-options';
 
 export default function parseArgs() {
   const {_: [command], projectDir, framework, dest, explicitIndex, version, help} = minimist(process.argv.slice(2), {

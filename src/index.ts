@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 
-import thisPackage = require('../package.json');
+import thisPackage from '../package.json';
 
 import './polyfills/enhance';
 

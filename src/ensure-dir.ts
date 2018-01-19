@@ -1,4 +1,4 @@
-﻿import mz = require('mz');
+﻿import mz from 'mz';
 const {fs} = mz;
 
 export default async function ensureDir(path: string) {

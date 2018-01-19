@@ -11,6 +11,7 @@
       true,
       "ban-single-arg-parens"
     ],
+    "no-require-imports": true,
     "no-empty-interface": true,
     "no-reference-import": true,
     "ordered-imports": [
@@ -56,9 +57,6 @@
       "never-prefix"
     ],
     "label-position": true,
-    "max-line-length": [
-      true
-    ],
     "no-arg": true,
     "no-consecutive-blank-lines": [
       true

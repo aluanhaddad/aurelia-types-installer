@@ -1,5 +1,5 @@
-import mz = require('mz');
-import requestPromise = require('request-promise');
+import mz from 'mz';
+import requestPromise from 'request-promise';
 
 import ensureDir from './ensure-dir';
 
