@@ -17,6 +17,7 @@ const {command, framework, version, help, ...args} = parseArgs();
   const log = (...x: string[]) => console.log(chalk.blue(...x));
   const info = (...x: string[]) => console.info(chalk.green(...x));
   const warn = (...x: string[]) => console.warn(chalk.yellow(...x));
+  const error = (...x: string[]) => console.error(chalk.red(...x));
 
   switch (command) {
     case 'install':
@@ -28,7 +29,7 @@ const {command, framework, version, help, ...args} = parseArgs();
         info(successSummary);
         warn(failureSummary);
       } catch (e) {
-        console.error.bind(e);
+        error(e);
       }
       break;
     default:
