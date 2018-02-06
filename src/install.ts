@@ -1,11 +1,12 @@
-﻿import deepEqual from 'deep-equal';
+﻿import json from 'comment-json';
+import deepEqual from 'deep-equal';
 import mz from 'mz';
 import path from 'path';
 
 import downloadDeclaration from './aquire-declaration';
 import ensureDir from './ensure-dir';
-import loadJspmConfiguration from './load-jspm-configuration';
 import InstallOptions from './install-options';
+import loadJspmConfiguration from './load-jspm-configuration';
 
 const {fs} = mz;
 
@@ -34,12 +35,13 @@ export default async function install({projectDir, framework, dest, explicitInde
       result.error
         ? {successes, failures: [...failures, result]}
         : {successes: [...successes, result.message], failures},
-      {successes: [] as string[], failures: [] as {message: string, error: string}[]});
+      {successes: <string[]>[], failures: <{message: string, error: string}[]>[]});
 
     const generatedTsConfigPath = baseUrl + path.sep + 'tsconfig.paths.json';
-    const tsConfig: TSConfig = require(await fs.realpath(baseUrl + path.sep + 'tsconfig.json'));
-    const generatedTsConfig: TSConfig = await fs.exists(generatedTsConfigPath)
-      ? require(generatedTsConfigPath)
+    const rawConfig = await fs.readFile(baseUrl + path.sep + 'tsconfig.json');
+    const tsConfig = <TSConfig>json.parse(rawConfig);
+    const generatedTsConfig = await fs.exists(generatedTsConfigPath)
+      ? <TSConfig>json.parse(await fs.readFile(generatedTsConfigPath))
       : {
         compilerOptions: {
           baseUrl: '.',
@@ -67,7 +69,7 @@ export default async function install({projectDir, framework, dest, explicitInde
     }
 
     if (!deepEqual(generatedTsConfig, tsConfig, {strict: true})) {
-      const serializedTsConfigPathsPath = JSON.stringify(generatedTsConfig, (_, value) => value, 2);
+      const serializedTsConfigPathsPath = json.stringify(generatedTsConfig, (_, value) => value, 2);
       await fs.writeFile(`${baseUrl}${path.sep}tsconfig.paths.json`, serializedTsConfigPathsPath);
     }
 
@@ -114,4 +116,9 @@ interface TSConfig {
       [key: string]: string[]
     }
   };
+}
+
+declare module 'comment-json' {
+  // tslint:disable-next-line:no-any
+  export function parse(value: any): any;
 }

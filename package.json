@@ -10,7 +10,7 @@
     "clean": "rimraf dist && npm run pretest",
     "build": "npm run clean && tsc -v && tsc -p tsconfig.json",
     "test": "ts-node -P tsconfig.test.json src/index.ts i --projectDir ./test/testapp --dest jspm_packages/npm",
-    "pretest": "rimraf test/testapp/jspm_packages/npm/**/*.ts test/testapp/tsconfig.paths.json && cd test/testapp && jspm i",
+    "pretest": "rimraf test/testapp/jspm_packages/npm/**/*.ts && cd test/testapp && jspm i",
     "lint": "tslint --project tsconfig.json --config tslint.json --format stylish"
   },
   "main": "dist/index",
@@ -28,6 +28,7 @@
   "dependencies": {
     "@types/bluebird": "^3.5.19",
     "@types/chalk": "^2.2.0",
+    "@types/comment-json": "^1.1.0",
     "@types/deep-equal": "^1.0.1",
     "@types/minimist": "1.2.0",
     "@types/mz": "0.0.32",
@@ -35,6 +36,7 @@
     "@types/request-promise": "^4.1.39",
     "async": "^2.6.0",
     "chalk": "^2.3.0",
+    "comment-json": "^1.1.3",
     "deep-equal": "^1.0.1",
     "flat-map-polyfill": "^0.3.8",
     "minimist": "^1.2.0",
@@ -51,7 +53,7 @@
     "tape": "^4.8.0",
     "ts-node": "^3.3.0",
     "tslint": "^5.9.1",
-    "typescript": "^2.7.0-dev.20180119"
+    "typescript": "^2.8.0-dev.20180206"
   },
   "keywords": [
     "aurelia",

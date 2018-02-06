@@ -86,7 +86,7 @@
     "no-unused-expression": true,
     "no-var-keyword": true,
     "no-var-requires": true,
-    "no-angle-bracket-type-assertion": true,
+    "no-angle-bracket-type-assertion": false,
     "one-line": [
       true,
       "check-else",
@@ -116,8 +116,7 @@
       "check-decl",
       "check-operator",
       "check-separator",
-      "check-type",
-      "check-typecast"
+      "check-type"
     ],
     "no-inferrable-types": true
   }

@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    // There is a comment
     "baseUrl": ".",
     "paths": {
       "aurelia-templating-resources": [
