@@ -2,5 +2,8 @@
   "tslint.autoFixOnSave": true,
   "editor.formatOnPaste": true,
   "editor.formatOnType": true,
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "files.associations": {
+    "tsconfig.*.json": "jsonc"
+  }
 }

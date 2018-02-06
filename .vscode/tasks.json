@@ -5,7 +5,7 @@
   "tasks": [
     {
       "command": "tsc",
-      "taskName": "build",
+      "label": "build",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -24,6 +24,23 @@
       ],
       "isBackground": true,
       "problemMatcher": "$tsc-watch"
+    },
+    {
+      "command": "npm test",
+      "label": "test",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "dedicated"
+      },
+      "args": [
+        "test"
+      ]
     }
   ]
 }
