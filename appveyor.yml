@@ -12,8 +12,7 @@ install:
   - npm install --global jspm@beta
   - node --version
   - npm --version
-test_script:
-  - node --version
-  - npm --version
   - jspm --version
-build: off
+test_script:
+build:
+  - ps: npm install
