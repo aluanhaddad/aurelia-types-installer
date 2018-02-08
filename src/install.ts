@@ -39,9 +39,9 @@ export default async function install({projectDir, framework, dest, explicitInde
 
     const generatedTsConfigPath = baseUrl + path.sep + 'tsconfig.paths.json';
     const rawConfig = await fs.readFile(baseUrl + path.sep + 'tsconfig.json');
-    const tsConfig = <TSConfig>json.parse(rawConfig);
+    const tsConfig = <TSConfig>json.parse(<string><{}>rawConfig);
     const generatedTsConfig = await fs.exists(generatedTsConfigPath)
-      ? <TSConfig>json.parse(await fs.readFile(generatedTsConfigPath))
+      ? <TSConfig>json.parse(<string><{}>(await fs.readFile(generatedTsConfigPath)))
       : {
         compilerOptions: {
           baseUrl: '.',
@@ -116,9 +116,4 @@ interface TSConfig {
       [key: string]: string[]
     }
   };
-}
-
-declare module 'comment-json' {
-  // tslint:disable-next-line:no-any
-  export function parse(value: any): any;
 }
