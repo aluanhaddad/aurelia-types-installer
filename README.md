@@ -4,6 +4,7 @@
 [![npm](https://img.shields.io/npm/l/aurelia-types-installer.svg)](https://github.com/aluanhaddad/aurelia-types-installer/blob/master/LICENSE)
 [![npm](https://img.shields.io/npm/dt/aurelia-types-installer.svg)](https://www.npmjs.com/package/aurelia-types-installer)
 [![Build Status](https://travis-ci.org/aluanhaddad/aurelia-types-installer.svg?branch=master)](https://travis-ci.org/aluanhaddad/aurelia-types-installer)
+[![Build status](https://ci.appveyor.com/api/projects/status/ws247kyjpe1nydpy?svg=true)](https://ci.appveyor.com/project/aluanhaddad/aurelia-types-installer)
 #### Aurelia Types Installer (ati) is a small command line utility for developers using [Aurelia](https://github.com/Aurelia) with [jspm](//jspm.io/) and [TypeScript](https://github.com/Microsoft/TypeScript).
 
 ati parses jspm configuration locates Aurelia package dependencies and installs their exact corresponding `.d.ts` declarations as proper
