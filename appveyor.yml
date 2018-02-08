@@ -15,6 +15,7 @@ platform:
 install:
   - ps: Install-Product node $env:nodejs_version $env:platform
 
+  - npm install --global jspm@beta
   - node --version
   - npm --version
   - npm config set spin false
