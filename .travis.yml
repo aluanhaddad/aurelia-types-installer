@@ -1,5 +1,7 @@
 language: node_js
 node_js:
   - 6.11
-  - 8.9
+  - 8.1
   - 9.5
+before_install:
+  - npm run verify-test-output
