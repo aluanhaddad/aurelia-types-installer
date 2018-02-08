@@ -6,9 +6,10 @@
   },
   "description": "A utiltiy for Aurelia + TypeScript + JSPM users that installs exact .d.ts versions as external modules.",
   "scripts": {
-    "prepare": "npm run lint && npm test && npm run build",
-    "clean": "rimraf dist && npm run pretest",
-    "build": "npm run clean && tsc -v && tsc -p tsconfig.json --noEmit false",
+    "prepublishOnly": "npm run lint && npm run build && npm test",
+    "clean": "rimraf dist && npm run rimraf test/testapp/jspm_packages/npm/**/*.ts",
+    "postinstall": "npm run build && npm test",
+    "build": "npm run clean && tsc -v && tsc -p tsconfig.json",
     "visual-test": "ts-node -P tsconfig.test.json src/index.ts i --projectDir ./test/testapp --dest jspm_packages/npm",
     "pretest": "rimraf test/testapp/jspm_packages/npm/**/*.ts && cd test/testapp && npm i && jspm -v && jspm install",
     "lint": "tslint --project tsconfig.json --config tslint.json --format stylish",
@@ -16,7 +17,8 @@
     "jspm": "jspm",
     "tsc": "tsc",
     "tslint": "tslint",
-    "ts-node": "ts-node"
+    "ts-node": "ts-node",
+    "rimraf": "rimraf"
   },
   "main": "dist/index",
   "typings": "dist/index",
@@ -55,9 +57,9 @@
     "blue-tape": "^1.0.0",
     "jspm": "^0.17.0-beta.47",
     "rimraf": "2.6.2",
-    "source-map-support": "^0.5.2",
+    "source-map-support": "^0.5.3",
     "tape": "^4.8.0",
-    "ts-node": "^3.3.0",
+    "ts-node": "^4.1.0",
     "tslint": "^5.9.1",
     "typescript": "^2.8.0-dev.20180206"
   },
