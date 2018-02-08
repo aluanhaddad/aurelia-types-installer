@@ -3,5 +3,3 @@ node_js:
   - 6.11
   - 8.1
   - 9.5
-after_install:
-  - npm test
