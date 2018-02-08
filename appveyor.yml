@@ -10,12 +10,10 @@ install:
   - ps: Install-Product node $env:nodejs_version $env:platform
 
   - npm install --global jspm@beta
+  - npm install --force
   - node --version
   - npm --version
-  - npm config set spin false
-  - npm install
 test_script:
   - node --version
   - npm --version
-  - npm run verify-test-output
-build: off
+  - npm test

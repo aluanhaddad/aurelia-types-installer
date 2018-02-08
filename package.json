@@ -9,10 +9,10 @@
     "prepare": "npm run lint && npm test && npm run build",
     "clean": "rimraf dist && npm run pretest",
     "build": "npm run clean && tsc -v && tsc -p tsconfig.json --noEmit false",
-    "test": "ts-node -P tsconfig.test.json src/index.ts i --projectDir ./test/testapp --dest jspm_packages/npm",
+    "visual-test": "ts-node -P tsconfig.test.json src/index.ts i --projectDir ./test/testapp --dest jspm_packages/npm",
     "pretest": "rimraf test/testapp/jspm_packages/npm/**/*.ts && cd test/testapp && jspm i",
     "lint": "tslint --project tsconfig.json --config tslint.json --format stylish",
-    "verify-test-output": "npm test > test/output.txt 2>&1 && ts-node -P tsconfig.test.json test/verify-output.ts test/output.txt",
+    "test": "npm run visual-test > test/output.txt 2>&1 && ts-node -P tsconfig.test.json test/verify-output.ts test/output.txt",
     "tsc": "tsc",
     "tslint": "tslint",
     "ts-node": "ts-node"
