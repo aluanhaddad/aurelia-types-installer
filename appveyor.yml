@@ -14,5 +14,4 @@ install:
   - npm --version
   - jspm --version
 test_script:
-build:
   - ps: npm install
