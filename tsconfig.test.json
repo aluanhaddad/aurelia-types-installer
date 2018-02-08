@@ -2,11 +2,15 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "rootDir": ".",
-    "noEmit": true
+    "noEmit": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
   },
   "exclude": [
     "node_modules",
     "jspm_packages",
-    "test/testapp"
+    "jspm_packages",
+    "test/testapp/**",
+    "test/jspm-0.16/**"
   ]
 }

@@ -8,10 +8,14 @@
   "scripts": {
     "prepare": "npm run lint && npm test && npm run build",
     "clean": "rimraf dist && npm run pretest",
-    "build": "npm run clean && tsc -v && tsc -p tsconfig.json",
+    "build": "npm run clean && tsc -v && tsc -p tsconfig.json --noEmit false",
     "test": "ts-node -P tsconfig.test.json src/index.ts i --projectDir ./test/testapp --dest jspm_packages/npm",
     "pretest": "rimraf test/testapp/jspm_packages/npm/**/*.ts && cd test/testapp && jspm i",
-    "lint": "tslint --project tsconfig.json --config tslint.json --format stylish"
+    "lint": "tslint --project tsconfig.json --config tslint.json --format stylish",
+    "verify-test-output": "npm test > test/output.txt 2>&1 && ts-node -P tsconfig.test.json test/verify-output.ts test/output.txt",
+    "tsc": "tsc",
+    "tslint": "tslint",
+    "ts-node": "ts-node"
   },
   "main": "dist/index",
   "typings": "dist/index",
@@ -45,7 +49,9 @@
     "tslib": "^1.9.0"
   },
   "devDependencies": {
+    "@types/blue-tape": "^0.1.31",
     "@types/tape": "^4.2.31",
+    "blue-tape": "^1.0.0",
     "jspm": "^0.17.0-beta.47",
     "rimraf": "2.6.2",
     "source-map-support": "^0.5.2",

@@ -6,3 +6,5 @@ v15/**
 .vs/**
 /.idea
 /dist
+/test.txt
+/test/output.txt

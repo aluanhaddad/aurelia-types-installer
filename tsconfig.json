@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "noEmit": true,
     "module": "commonjs",
     "esModuleInterop": true,
     "target": "es5",
@@ -23,10 +24,13 @@
     "importHelpers": true,
     "forceConsistentCasingInFileNames": true
   },
+  "include": [
+    "../test/*.ts",
+    "src/**/*.ts"
+  ],
   "exclude": [
     "node_modules",
     "jspm_packages",
-    "test/testapp",
-    "test"
+    "test/testapp"
   ]
 }

@@ -4,7 +4,4 @@ node_js:
   - 8.1
   - 9.5
 before_install:
-  - cd ./test/testapp
-  - npm install
-  - jspm i
-  - cd ./../..
+  - npm run verify-test-output
