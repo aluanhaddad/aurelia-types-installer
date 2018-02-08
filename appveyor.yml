@@ -10,11 +10,10 @@ install:
   - ps: Install-Product node $env:nodejs_version $env:platform
 
   - npm install --global jspm@beta
-  - npm install --force
   - node --version
   - npm --version
 test_script:
   - node --version
   - npm --version
-  - npm test
+  - jspm --version
 build: off
