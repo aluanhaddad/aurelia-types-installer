@@ -3,7 +3,7 @@ import fs from 'mz/fs';
 import test from 'blue-tape';
 
 const input = process.argv[2];
-console.error(process.argv);
+console.info(process.argv);
 test('ouput should contain expected successfully retrieved declaration count', async ({ok, plan}) => {
   plan(1);
   const data = await fs.readFile(input);
