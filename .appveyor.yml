@@ -1,0 +1,29 @@
+version: "{build}"
+clone_depth: 1
+environment:
+  matrix:
+    - nodejs_version: "4"
+    - nodejs_version: "6"
+    - nodejs_version: "8"
+    - nodejs_version: "9"
+matrix:
+  fast_finish: true
+cache:
+  - node_modules
+platform:
+  - x64
+install:
+  - ps: Install-Product node $env:nodejs_version $env:platform
+
+  - node --version
+  - npm --version
+  - npm config set spin false
+  - npm install
+test_script:
+  - node --version
+  - npm --version
+  - cd ./test/testappa
+  - jspm --version
+  - jspm install
+  - cd ./../..
+build: off
