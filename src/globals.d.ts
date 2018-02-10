@@ -1,5 +1,4 @@
 declare module "*.json";
-
 declare namespace NodeJS {
   interface Global {
     SystemJS?: {

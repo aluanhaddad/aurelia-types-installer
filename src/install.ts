@@ -1,19 +1,33 @@
 ﻿import json from 'comment-json';
 import deepEqual from 'deep-equal';
-import mz from 'mz';
 import path from 'path';
 
 import downloadDeclaration from './aquire-declaration';
 import ensureDir from './ensure-dir';
 import InstallOptions from './install-options';
 import loadJspmConfiguration from './load-jspm-configuration';
-
-const {fs} = mz;
+import extractExactVersions from './extract-exact-versions';
+import fs from 'mz/fs';
 
 export default async function install({projectDir, framework, dest, explicitIndex}: InstallOptions) {
   const baseUrl = await fs.realpath(projectDir);
   let successSummary = '';
   let failureSummary = '';
+
+  const allVersions = [];
+  for await (const item of extractExactVersions(baseUrl)) {
+    allVersions.push(item);
+  }
+  const normalizedAllVersions = allVersions
+    .flatMap(x => x.paths)
+    .map(x => {
+      const index = x.indexOf('@');
+      return index !== -1 ? x.substr(x.lastIndexOf('@')) : x;
+    })
+    .filter(Boolean);
+
+  // console.log(...allVersions);
+
   for await (const {paths, configFile} of loadJspmConfiguration({baseUrl, framework})) {
     successSummary += `\nUsing config source: ${configFile}:\n`;
     const {successes, failures} = (await Promise.all(paths.map(async path => {
@@ -57,6 +71,16 @@ export default async function install({projectDir, framework, dest, explicitInde
       };
     }
     const {compilerOptions} = generatedTsConfig;
+
+    new Set(normalizedAllVersions).forEach(resolution => {
+      const d = dest.split('/npm')[0];
+      const nes = [`${d}/npm/*${resolution}${explicitIndex ? '/index' : ''}`, `${d}/npm/@types/*${resolution}${explicitIndex ? '/index' : ''}`];
+
+      if (!compilerOptions.paths[`*`]) {
+        compilerOptions.paths[`*`] = [];
+      }
+      compilerOptions.paths['*'].push(...nes);
+    });
 
     paths.forEach(name => {
       const existingEntries = compilerOptions.paths[`${framework}-${name.split('@')[0]}`];

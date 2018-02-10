@@ -16,7 +16,6 @@ export default function extractJspmConfig(jspmConfigPath: string, predicate: (pa
   global.global.SystemJS = SystemJSRestore;
   return unrollWithFilter(jspmConfig, predicate);
 }
-
 function unrollWithFilter(o: object, predicate: (packageName: string) => boolean): string[] {
   if (!o || typeof o === 'number' || typeof o === 'boolean') {
     return [];
