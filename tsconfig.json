@@ -19,8 +19,9 @@
     "declaration": true,
     "types": [],
     "pretty": true,
-    "noEmitHelpers": true,
-    "importHelpers": true,
+    // TODO: reenable this and reinstall tslib when import interop is correctly provided for the Node.js esm subset.
+    "noEmitHelpers": false,
+    "importHelpers": false,
     "forceConsistentCasingInFileNames": true
   },
   "include": [
