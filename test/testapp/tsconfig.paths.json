@@ -7,7 +7,7 @@
         "jspm_packages/npm/aurelia-templating-resources@1.4.0"
       ],
       "aurelia-dialog": [
-        "jspm_packages/npm/aurelia-dialog@1.0.0-rc.1.0.3"
+        "jspm_packages/npm/aurelia-dialog@1.0.0-rc.1.0.3/aurelia-dialog"
       ],
       "aurelia-bootstrap": [
         "jspm_packages/npm/aurelia-bootstrap@0.1.19"
