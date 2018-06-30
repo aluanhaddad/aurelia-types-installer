@@ -1,3 +1,7 @@
 export default function polyfillSymbolAsyncIterator() {
-  (Symbol as {asyncIterator?: symbol}).asyncIterator = Symbol.asyncIterator || Symbol.for('Symbol.asyncIterator');
+  if (!Symbol.asyncIterator) {
+    (<{ asyncIterator?: symbol }>Symbol).asyncIterator = Symbol.for(
+      'Symbol.asyncIterator'
+    );
+  }
 }
