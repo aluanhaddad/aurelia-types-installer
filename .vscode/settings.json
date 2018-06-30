@@ -1,6 +1,8 @@
 {
+  "tslint.configFile": "tslint.json",
   "prettier.requireConfig": true,
   "tslint.jsEnable": false,
+  "tslint.validateWithDefaultConfig": false,
   "tslint.autoFixOnSave": true,
   "editor.formatOnPaste": true,
   "editor.formatOnType": true,
