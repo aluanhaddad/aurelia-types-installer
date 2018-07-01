@@ -8,7 +8,6 @@
   "scripts": {
     "prepublishOnly": "npm run lint && npm run build && npm test",
     "clean": "rimraf dist && npm run rimraf test/testapp/jspm_packages/npm/**/*.ts",
-    "postinstall": "npm run build && npm test",
     "build": "npm run clean && tsc -v && tsc -p tsconfig.json",
     "visual-test": "ts-node -P tsconfig.test.json src/index.ts i --projectDir ./test/testapp --dest jspm_packages/npm",
     "pretest": "rimraf test/testapp/jspm_packages/npm/**/*.ts && cd test/testapp && npm i && jspm -v && jspm install",
