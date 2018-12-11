@@ -7,6 +7,7 @@ import downloadDeclaration from './aquire-declaration';
 import ensureDir from './ensure-dir';
 import InstallOptions from './install-options';
 import loadJspmConfiguration from './load-jspm-configuration';
+import TSConfig from './ts-config';
 
 const {fs} = mz;
 
@@ -58,11 +59,15 @@ export default async function install({projectDir, framework, dest, explicitInde
     }
     const {compilerOptions} = generatedTsConfig;
 
-    paths.forEach(name => {
-      const existingEntries = compilerOptions.paths[`${framework}-${name.split('@')[0]}`];
-      const newEntry = `${dest}/${framework}-${name}${explicitIndex ? '/index' : ''}`;
-      compilerOptions.paths[`${framework}-${name.split('@')[0]}`] = existingEntries ? [...existingEntries.filter(entry => entry !== newEntry), newEntry] : [newEntry];
-    });
+    for (const path of paths) {
+      const existingEntries = compilerOptions.paths[`${framework}-${path.split('@')[0]}`] || [];
+      const newEntry = `${dest}/${framework}-${path}${explicitIndex ? '/index' : ''}`;
+      const newEntries = [];
+      for await (const path of prunePaths(existingEntries.filter(entry => entry !== newEntry))) {
+        newEntries.push(path);
+      }
+      compilerOptions.paths[`${framework}-${path.split('@')[0]}`] = [newEntry, ...newEntries];
+    }
 
     if (!explicitIndex && !tsConfig.compilerOptions.moduleResolution && !generatedTsConfig.compilerOptions.moduleResolution) {
       generatedTsConfig.compilerOptions.moduleResolution = 'node';
@@ -106,14 +111,14 @@ consider:
     to a global .d.ts file
   `;
   }
-}
 
-interface TSConfig {
-  compilerOptions: {
-    moduleResolution?: 'node' | 'classic'
-    baseUrl?: string
-    paths: {
-      [key: string]: string[]
+  async function* prunePaths(paths: string[]) {
+    for (const path of paths) {
+      const [pkgDir] = /(.*\@[^/]*)/.exec(path) || [undefined];
+      const exists = await fs.exists(`${baseUrl}/${pkgDir}`);
+      if (exists) {
+        yield path;
+      }
     }
-  };
+  }
 }
