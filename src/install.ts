@@ -60,13 +60,15 @@ export default async function install({projectDir, framework, dest, explicitInde
     const {compilerOptions} = generatedTsConfig;
 
     for (const path of paths) {
-      const existingEntries = compilerOptions.paths[`${framework}-${path.split('@')[0]}`] || [];
+      const entryKey = `${framework}-${path.split('@')[0]}`;
+      const existingEntries = compilerOptions.paths[entryKey] || [];
       const newEntry = `${dest}/${framework}-${path}${explicitIndex ? '/index' : ''}`;
       const newEntries = [];
+      const relativeEntries = existingEntries.filter(entry => entry.startsWith('.'));
       for await (const path of prunePaths(existingEntries.filter(entry => entry !== newEntry))) {
         newEntries.push(path);
       }
-      compilerOptions.paths[`${framework}-${path.split('@')[0]}`] = [newEntry, ...newEntries];
+      compilerOptions.paths[entryKey] = [...relativeEntries, newEntry, ...newEntries];
     }
 
     if (!explicitIndex && !tsConfig.compilerOptions.moduleResolution && !generatedTsConfig.compilerOptions.moduleResolution) {
@@ -74,7 +76,7 @@ export default async function install({projectDir, framework, dest, explicitInde
     }
 
     if (!deepEqual(generatedTsConfig, tsConfig, {strict: true})) {
-      const serializedTsConfigPathsPath = json.stringify(generatedTsConfig, (_, value) => value, 2);
+      const serializedTsConfigPathsPath = json.stringify(generatedTsConfig, undefined, 2);
       await fs.writeFile(`${baseUrl}${path.sep}tsconfig.paths.json`, serializedTsConfigPathsPath);
     }
 
