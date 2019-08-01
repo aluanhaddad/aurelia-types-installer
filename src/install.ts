@@ -3,7 +3,7 @@ import deepEqual from 'deep-equal';
 import mz from 'mz';
 import path from 'path';
 
-import downloadDeclaration from './aquire-declaration';
+import acquireDeclaration from './acquire-declaration';
 import ensureDir from './ensure-dir';
 import InstallOptions from './install-options';
 import loadJspmConfiguration from './load-jspm-configuration';
@@ -21,7 +21,7 @@ export default async function install({projectDir, framework, dest, explicitInde
       try {
         await ensureDir(baseUrl + '/' + dest);
         try {
-          const result = await downloadDeclaration(baseUrl, dest, path, framework);
+          const result = await acquireDeclaration({baseUrl, destinationDir: dest, versionedName: path, prefix: framework});
           return {message: result, error: undefined};
         } catch (e) {
           return {
