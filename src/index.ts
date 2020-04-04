@@ -2,10 +2,9 @@ import chalk from 'chalk';
 
 import thisPackage from '../package.json';
 
-import './polyfills/enhance';
-
 import install from './install';
 import parseArgs from './parse-args';
+import './polyfills/enhance';
 
 const {version: atiVersion} = thisPackage;
 
