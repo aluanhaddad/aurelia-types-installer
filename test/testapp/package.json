@@ -111,6 +111,6 @@
     }
   },
   "devDependencies": {
-    "jspm": "^0.17.0-beta.47"
+    "jspm": "^2.0.0-beta.7"
   }
 }
